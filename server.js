@@ -185,7 +185,7 @@ app.get("/api/me", auth, wrap(async (req, res) => {
   const athletes = req.user.role === "entrenadora"
     ? (await q("SELECT id,name FROM users WHERE role='atleta' ORDER BY id")).rows
     : [{ id: req.user.id, name: req.user.name }];
-  res.json({ user: req.user, athletes, canParse: !!process.env.ANTHROPIC_API_KEY });
+  res.json({ user: req.user, athletes, canParse: !!(process.env.OPENROUTER_API_KEY || process.env.ANTHROPIC_API_KEY) });
 }));
 
 app.post("/api/password", auth, wrap(async (req, res) => {
@@ -249,10 +249,44 @@ app.delete("/api/routines/:id", auth, wrap(async (req, res) => {
   res.json({ ok: true });
 }));
 
+// Calls the model through OpenRouter (or Anthropic directly if that's the key you have)
+async function askModel(prompt) {
+  if (process.env.OPENROUTER_API_KEY) {
+    const r = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json",
+        "X-Title": "Entrenos de Juli",
+      },
+      body: JSON.stringify({
+        model: process.env.OPENROUTER_MODEL || "anthropic/claude-sonnet-5.5",
+        max_tokens: 8000,
+        messages: [{ role: "user", content: prompt }],
+      }),
+    });
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok || data.error) throw new Error(data.error?.message || `HTTP ${r.status}`);
+    return data.choices?.[0]?.message?.content || "";
+  }
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "x-api-key": process.env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    body: JSON.stringify({
+      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5",
+      max_tokens: 8000,
+      messages: [{ role: "user", content: prompt }],
+    }),
+  });
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(data.error?.message || `HTTP ${r.status}`);
+  return (data.content || []).filter((c) => c.type === "text").map((c) => c.text).join("");
+}
+
 // Turn the trainer's WhatsApp text into a structured routine
 app.post("/api/routines/parse", auth, wrap(async (req, res) => {
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) return res.status(400).json({ error: "Falta ANTHROPIC_API_KEY en el servidor." });
+  if (!process.env.OPENROUTER_API_KEY && !process.env.ANTHROPIC_API_KEY)
+    return res.status(400).json({ error: "Falta OPENROUTER_API_KEY en el servidor." });
   const text = String(req.body.text || "").slice(0, 30000);
   if (text.trim().length < 20) return res.status(400).json({ error: "Pegá el texto completo de la rutina." });
   const aid = await athleteFor(req);
@@ -280,18 +314,12 @@ Texto:
 ${text}
 """`;
 
-  const r = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-    body: JSON.stringify({
-      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-5-5",
-      max_tokens: 8000,
-      messages: [{ role: "user", content: prompt }],
-    }),
-  });
-  const data = await r.json();
-  if (!r.ok) return res.status(502).json({ error: "Claude no pudo leer la rutina: " + (data.error?.message || r.status) });
-  const out = (data.content || []).filter((c) => c.type === "text").map((c) => c.text).join("");
+  let out;
+  try {
+    out = await askModel(prompt);
+  } catch (e) {
+    return res.status(502).json({ error: "No se pudo leer la rutina: " + e.message });
+  }
   const json = out.slice(out.indexOf("{"), out.lastIndexOf("}") + 1);
   try {
     res.json(JSON.parse(json));

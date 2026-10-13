@@ -20,7 +20,8 @@ Node 20+ · Express · Postgres. Sin build: `npm start` y listo.
    | `ATHLETE_NAME` | `Juli` |
    | `COACH_EMAIL` / `COACH_PASSWORD` | el login de tu entrenadora |
    | `COACH_NAME` | su nombre |
-   | `ANTHROPIC_API_KEY` | opcional: para pegar la rutina de WhatsApp y que se cargue sola |
+   | `OPENROUTER_API_KEY` | opcional: para pegar la rutina de WhatsApp y que se cargue sola |
+   | `OPENROUTER_MODEL` | opcional, por defecto `anthropic/claude-sonnet-5.5` |
 
 5. **Settings → Networking → Generate Domain** para tener la URL pública.
 
@@ -41,7 +42,7 @@ La sesión dura 4 meses, así que se abre directo.
 
 **Historial:** cada entreno con sus series. La entrenadora puede dejar un comentario, que aparece en el entreno.
 
-**Rutinas:** la vigente y las anteriores. *Nueva rutina* permite pegar el mensaje de WhatsApp (con `ANTHROPIC_API_KEY`), duplicar la vigente o empezar en blanco; siempre se revisa en el editor antes de guardar. Pueden cargarla tanto la atleta como la entrenadora.
+**Rutinas:** la vigente y las anteriores. *Nueva rutina* permite pegar el mensaje de WhatsApp (con `OPENROUTER_API_KEY`), duplicar la vigente o empezar en blanco; siempre se revisa en el editor antes de guardar. Pueden cargarla tanto la atleta como la entrenadora.
 
 ## Local
 

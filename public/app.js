@@ -601,7 +601,7 @@ function viewSheet() {
         <button class="btn primary" data-act="parse">Interpretar y revisar</button>
         <div class="small muted">Vas a poder revisar y corregir todo antes de guardar.</div>
         <hr style="border:0;border-top:1px solid var(--line);width:100%">`
-        : `<p class="small muted">Para pegar el texto de WhatsApp y que se cargue solo, hay que configurar ANTHROPIC_API_KEY en el servidor.</p>`}
+        : `<p class="small muted">Para pegar el texto de WhatsApp y que se cargue solo, hay que configurar OPENROUTER_API_KEY en el servidor.</p>`}
       ${S.routines.length ? `<button class="btn" data-duprt="${currentRoutine().id}">Partir de la rutina vigente</button>` : ""}
       <button class="btn" data-act="blank-routine">Empezar en blanco</button>
     </div></div>`;
