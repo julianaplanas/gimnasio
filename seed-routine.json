@@ -1,0 +1,171 @@
+{
+  "name": "Mes 5",
+  "from": "2026-10-12",
+  "to": "2026-11-08",
+  "createdAt": "2026-10-13T12:00:00Z",
+  "days": [
+    {
+      "id": "lunes",
+      "name": "Lunes",
+      "blocks": [
+        {
+          "name": "Entrada en calor · abdominales",
+          "sets": "2 series",
+          "notes": "",
+          "exercises": [
+            {"key": "abs-crunch", "name": "Crunch", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-situp", "name": "Sit up", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-oblicuos", "name": "Oblicuos (codo con rodilla contraria)", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-plancha", "name": "Plancha sobre antebrazos", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-cadera", "name": "Plancha antebrazos, cadera a un lado y al otro", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-hombros", "name": "Plancha alta tocando hombro contrario", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-rodillas", "name": "Plancha alta, rodillas al pecho", "mode": "check", "reps": "30 seg"}
+          ]
+        },
+        {
+          "name": "1er dupleto",
+          "sets": "3 series",
+          "notes": "",
+          "exercises": [
+            {"key": "sentadilla-press", "name": "Sentadilla + disco/mancuerna con curl y press", "mode": "peso", "sets": "3", "reps": "10–12", "kg": "10", "notes": "Primero 5 sentadillas sin carga. Bajás con el disco casi al suelo y subís con flexión de codo (bíceps) y press de hombros por encima de la cabeza."},
+            {"key": "codo-rodilla-pie", "name": "De pie, codo con rodilla contraria", "mode": "reps", "sets": "3", "reps": "20 (10 por pierna)"}
+          ]
+        },
+        {
+          "name": "Glúteos",
+          "sets": "",
+          "notes": "",
+          "exercises": [
+            {"key": "hip-thrust", "name": "Hip thrust", "mode": "peso", "sets": "3", "reps": "8–10", "kg": "40+", "notes": "Barra o máquina. Arriba aguantás 3 segundos y bajás suave. 1ª serie: 8 o más reps. 2ª: subís un poco la carga y hacés menos reps. 3ª: subís si podés o mantenés y hacés las que puedas. 1 minuto de descanso. Con cargas altas, 6–8 reps está bien."},
+            {"key": "peso-muerto-1-pierna", "name": "Peso muerto a 1 pierna", "mode": "peso", "sets": "3", "reps": "10–12", "kg": "10 c/mano", "notes": "El peso va a una pierna, la otra un poco retrasada sin levantarla. Cadera hacia atrás con leve flexión de rodilla (no es sentadilla) y al subir apretás fuerte los glúteos. Si subís carga, cuidado con la zona lumbar."}
+          ]
+        },
+        {
+          "name": "Espalda",
+          "sets": "",
+          "notes": "Si te salen fáciles más de 8 reps, aumentá la carga y volvé a 6 reps.",
+          "exercises": [
+            {"key": "dorsales-prono", "name": "Dorsales, toma prona", "mode": "peso", "sets": "2–3", "reps": "6–8", "kg": "35"},
+            {"key": "dorsales-supino", "name": "Dorsales, toma supina", "mode": "peso", "sets": "2–3", "reps": "6–8", "kg": "35"}
+          ]
+        },
+        {
+          "name": "Dupleto de brazos",
+          "sets": "",
+          "notes": "Al final: cardio si querés y elongación.",
+          "exercises": [
+            {"key": "biceps-mancuernas", "name": "Bíceps: flexión de codo con mancuernas", "mode": "peso", "sets": "2", "reps": "8–10 c/brazo", "kg": "8"},
+            {"key": "triceps-extension-arriba", "name": "Tríceps: extensión de codo hacia arriba", "mode": "peso", "sets": "2", "reps": "10–15", "kg": "6–8"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "miercoles",
+      "name": "Miércoles",
+      "blocks": [
+        {
+          "name": "Entrada en calor · abdominales",
+          "sets": "2 series",
+          "notes": "Igual que el lunes. Después 10 sentadillas sin carga.",
+          "exercises": [
+            {"key": "abs-crunch", "name": "Crunch", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-situp", "name": "Sit up", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-oblicuos", "name": "Oblicuos (codo con rodilla contraria)", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-plancha", "name": "Plancha sobre antebrazos", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-cadera", "name": "Plancha antebrazos, cadera a un lado y al otro", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-hombros", "name": "Plancha alta tocando hombro contrario", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-rodillas", "name": "Plancha alta, rodillas al pecho", "mode": "check", "reps": "30 seg"}
+          ]
+        },
+        {
+          "name": "Glúteos",
+          "sets": "",
+          "notes": "",
+          "exercises": [
+            {"key": "kickback-polea", "name": "Kickback (patada de glúteo) en polea", "mode": "peso", "sets": "3", "reps": "15", "kg": "20+", "notes": "Alternás piernas. Podés empezar con 20 kg y en la 3ª subir un poco y hacer menos reps, según el cansancio."},
+            {"key": "gluteos-banco", "name": "Glúteos en posición de banco (circuito de 4)", "mode": "peso", "sets": "1 por pierna", "reps": "10–12 c/u", "kg": "tobillera o 2–3", "notes": "Antebrazos apoyados para no arquear la espalda. 1) Pierna estirada arriba hasta la cadera, bajás cruzando sobre la otra, subís apretando. 2) Rodilla en L, empujás hacia arriba corto apretando. 3) Desde 90°, talón a la cola con fuerza y alejás. 4) Rodilla flexionada, bajás cruzándola y subís a 90°. Los 4 seguidos sin pausa. Elongás el glúteo sentada y hacés los abdominales inferiores antes de la otra pierna."},
+            {"key": "abs-inferiores", "name": "Abdominales inferiores", "mode": "reps", "sets": "1 por pierna", "reps": "20 + 20", "notes": "20 hacia atrás con rodillas flexionadas y 20 con piernas estiradas lo más perpendicular, levantando la cadera. Manos debajo de la cola."}
+          ]
+        },
+        {
+          "name": "Pectorales",
+          "sets": "",
+          "notes": "Antes, una serie de press con poca carga (10 reps) para entrar en calor. Si se vuelve fácil, subí la carga y bajá reps; si estás cansada, menos carga.",
+          "exercises": [
+            {"key": "press-pecho-banco", "name": "Press de pecho en banco plano", "mode": "peso", "sets": "3", "reps": "8 / 10 / 12", "kg": "25"},
+            {"key": "apertura-banco", "name": "Apertura en banco plano con mancuernas", "mode": "peso", "sets": "3", "reps": "10", "kg": "10 c/mano", "notes": "Pesas arriba, abrís a los laterales con leve flexión de codos."}
+          ]
+        },
+        {
+          "name": "Hombros · tripleto",
+          "sets": "3 series",
+          "notes": "Sentada en banco o arrodillada. Al final, algo de cardio si querés y elongar.",
+          "exercises": [
+            {"key": "vuelo-frontal", "name": "Vuelo frontal", "mode": "peso", "sets": "3", "reps": "8–10", "kg": "4", "notes": "Brazos alternados hasta la altura del hombro."},
+            {"key": "vuelo-lateral", "name": "Vuelo lateral", "mode": "peso", "sets": "3", "reps": "8–10", "kg": "4", "notes": "Los dos juntos, pequeña flexión de codo, hasta la altura del hombro."},
+            {"key": "vuelo-posterior", "name": "Vuelo posterior", "mode": "peso", "sets": "3", "reps": "8–10", "kg": "2–3", "notes": "Sentada, cuerpo inclinado hacia adelante, brazos al lateral con leve flexión de codo."}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viernes",
+      "name": "Viernes",
+      "blocks": [
+        {
+          "name": "Entrada en calor · abdominales",
+          "sets": "2 series",
+          "notes": "Igual que el lunes. Después 10 sentadillas sin carga.",
+          "exercises": [
+            {"key": "abs-crunch", "name": "Crunch", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-situp", "name": "Sit up", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-oblicuos", "name": "Oblicuos (codo con rodilla contraria)", "mode": "check", "reps": "20 seg o 20 rep"},
+            {"key": "abs-plancha", "name": "Plancha sobre antebrazos", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-cadera", "name": "Plancha antebrazos, cadera a un lado y al otro", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-hombros", "name": "Plancha alta tocando hombro contrario", "mode": "check", "reps": "30 seg"},
+            {"key": "abs-plancha-rodillas", "name": "Plancha alta, rodillas al pecho", "mode": "check", "reps": "30 seg"}
+          ]
+        },
+        {
+          "name": "Dupleto",
+          "sets": "3 series",
+          "notes": "",
+          "exercises": [
+            {"key": "sentadilla-abierta-press", "name": "Sentadilla piernas abiertas + press de hombros", "mode": "peso", "sets": "3", "reps": "", "kg": "5 c/mano", "notes": "Bajás con los brazos abajo y al subir estirás rodillas y llevás las pesas en press de hombros. Probá qué peso podés subir sobre la cabeza."},
+            {"key": "triceps-tras-nuca", "name": "Tríceps: extensión tras nuca sentada", "mode": "peso", "sets": "3", "reps": "", "kg": ""}
+          ]
+        },
+        {
+          "name": "Glúteos · tripleto",
+          "sets": "2 series",
+          "notes": "",
+          "exercises": [
+            {"key": "swing-1-mano", "name": "Swing a 1 mano (kettlebell)", "mode": "peso", "sets": "2", "reps": "10", "kg": "12+"},
+            {"key": "puente-step", "name": "Puente con carga, pies en step", "mode": "peso", "sets": "2", "reps": "", "kg": "pesada", "notes": "Talones apoyados en el step o colchonetas, puntas hacia arriba. Una carga que te cueste."},
+            {"key": "peso-muerto-1-pierna", "name": "Peso muerto a 1 pierna", "mode": "peso", "sets": "2", "reps": "10–12", "kg": "30+"}
+          ]
+        },
+        {
+          "name": "Remo",
+          "sets": "",
+          "notes": "",
+          "exercises": [
+            {"key": "remo-unilateral", "name": "Remo unilateral", "mode": "peso", "sets": "3", "reps": "6 / 8 / 10", "kg": "16", "notes": "Con disco, mancuerna o kettle. Alternás lado."}
+          ]
+        },
+        {
+          "name": "Cuarteto",
+          "sets": "2 series",
+          "notes": "Repetís los 4 dos veces. Al final cardio si querés y elongación.",
+          "exercises": [
+            {"key": "fondos-triceps", "name": "Fondos de tríceps en banco", "mode": "reps", "sets": "2", "reps": "", "notes": "Manos en el banquito, dedos hacia abajo, codos hacia atrás bajando el tronco."},
+            {"key": "climbers", "name": "Climbers", "mode": "reps", "sets": "2", "reps": "10", "notes": "Plancha alta llevando rodillas al pecho, con algo de velocidad."},
+            {"key": "biceps-mancuernas", "name": "Bíceps: flexión de codo alternada", "mode": "peso", "sets": "2", "reps": "10 c/brazo", "kg": ""},
+            {"key": "sentadilla-salto", "name": "Sentadilla con salto", "mode": "reps", "sets": "2", "reps": "10", "notes": "Si no querés saltar, subís hasta punta de pie."}
+          ]
+        }
+      ]
+    }
+  ]
+}

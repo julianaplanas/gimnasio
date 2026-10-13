@@ -1,0 +1,22 @@
+{
+  "name": "entrenos-juli",
+  "version": "1.0.0",
+  "description": "Registro de entrenamientos de Juli",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.23.1"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}
