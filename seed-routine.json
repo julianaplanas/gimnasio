@@ -36,7 +36,7 @@
           "sets": "",
           "notes": "",
           "exercises": [
-            {"key": "hip-thrust", "name": "Hip thrust", "mode": "peso", "sets": "3", "reps": "8–10", "kg": "40+", "notes": "Barra o máquina. Arriba aguantás 3 segundos y bajás suave. 1ª serie: 8 o más reps. 2ª: subís un poco la carga y hacés menos reps. 3ª: subís si podés o mantenés y hacés las que puedas. 1 minuto de descanso. Con cargas altas, 6–8 reps está bien."},
+            {"key": "hip-thrust", "name": "Hip thrust", "mode": "peso", "sets": "3", "reps": "8–10", "kg": "40+", "rest": "60", "notes": "Barra o máquina. Arriba aguantás 3 segundos y bajás suave. 1ª serie: 8 o más reps. 2ª: subís un poco la carga y hacés menos reps. 3ª: subís si podés o mantenés y hacés las que puedas. 1 minuto de descanso. Con cargas altas, 6–8 reps está bien."},
             {"key": "peso-muerto-1-pierna", "name": "Peso muerto a 1 pierna", "mode": "peso", "sets": "3", "reps": "10–12", "kg": "10 c/mano", "notes": "El peso va a una pierna, la otra un poco retrasada sin levantarla. Cadera hacia atrás con leve flexión de rodilla (no es sentadilla) y al subir apretás fuerte los glúteos. Si subís carga, cuidado con la zona lumbar."}
           ]
         },

@@ -1,5 +1,5 @@
 // App shell cache: the app opens instantly and offline; data always comes from the network.
-const VERSION = "entrenos-v1";
+const VERSION = "entrenos-v2";
 const SHELL = ["/", "/app.js", "/styles.css", "/manifest.webmanifest", "/icons/icon-192.png"];
 
 self.addEventListener("install", (e) => {

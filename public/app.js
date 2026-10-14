@@ -271,18 +271,30 @@ function viewBlock(b, bi) {
   const head = `<div class="block-head"><h2>${h(b.name)}</h2>${b.sets ? `<span class="sets">${h(b.sets)}</span>` : ""}</div>${b.notes ? `<p class="block-note">${h(b.notes)}</p>` : ""}`;
   if (allCheck) {
     return `<section class="block">${head}<div class="card check-list">${b.exercises.map((e) => {
-      const done = !!S.train.entries[e.key]?.done;
-      return `<button class="check" data-check="${h(e.key)}" aria-pressed="${done}"><span class="box"></span><span class="t">${h(e.name)}</span><span class="r">${h(e.reps || "")}</span></button>`;
+      return checkRow(e, false);
     }).join("")}</div></section>`;
   }
   return `<section class="block">${head}${b.exercises.map((e) => viewExercise(e)).join("")}</section>`;
 }
 
+// "30 seg", "20 seg o 20 rep" → 30, 20
+const secsOf = (e) => { const m = String(e.reps || "").match(/(\d+)\s*(seg|s\b|")/i); return m ? +m[1] : 0; };
+const restOf = (e) => toNum(e.rest) || store.get("restDefault", 60);
+const fmtClock = (sec) => { const a = Math.abs(Math.round(sec)); return `${Math.floor(a / 60)}:${String(a % 60).padStart(2, "0")}`; };
+
+function checkRow(e, bold) {
+  const done = !!S.train.entries[e.key]?.done;
+  const secs = secsOf(e);
+  return `<div class="check-row">
+    <button class="check" data-check="${h(e.key)}" aria-pressed="${done}"><span class="box"></span><span class="t">${bold ? `<b>${h(e.name)}</b>` : h(e.name)}</span><span class="r">${h(e.reps || "")}</span></button>
+    ${secs ? `<button class="play" data-extimer="${h(e.key)}" data-secs="${secs}" data-label="${h(e.name)}" aria-label="Temporizador ${secs} segundos">${ICON_PLAY}</button>` : ""}
+  </div>`;
+}
+
 function viewExercise(e) {
   const t = S.train;
   if (e.mode === "check") {
-    const done = !!t.entries[e.key]?.done;
-    return `<div class="card" data-card="${h(e.key)}"><button class="check" data-check="${h(e.key)}" aria-pressed="${done}"><span class="box"></span><span class="t"><b>${h(e.name)}</b></span><span class="r">${h(e.reps || "")}</span></button></div>`;
+    return `<div class="card" data-card="${h(e.key)}">${checkRow(e, true)}</div>`;
   }
   const withKg = e.mode !== "reps";
   const entry = t.entries[e.key];
@@ -313,6 +325,7 @@ function viewExercise(e) {
     </div>
     <div class="ex-actions">
       <button class="btn ghost sm" data-addset="${h(e.key)}">+ Serie</button>
+      <button class="btn ghost sm" data-rest="${h(e.key)}" data-secs="${restOf(e)}" data-label="${h(e.name)}">Descanso ${fmtClock(restOf(e))}</button>
       ${lastSets.length ? `<button class="btn ghost sm" data-copylast="${h(e.key)}">Copiar última vez</button>` : ""}
       ${note ? "" : `<button class="btn ghost sm" data-addnote="${h(e.key)}">+ Nota</button>`}
     </div>
@@ -542,6 +555,7 @@ function viewEditor() {
                   <div class="field"><label>Se anota</label><select class="input" data-path="${p}.mode">
                     ${[["peso", "Reps y peso"], ["reps", "Solo reps"], ["check", "Tilde (hecho)"]].map(([v, l]) => `<option value="${v}" ${e.mode === v ? "selected" : ""}>${l}</option>`).join("")}
                   </select></div>
+                  <div class="field"><label>Descanso entre series (seg)</label><input class="input" inputmode="numeric" data-path="${p}.rest" value="${h(e.rest || "")}" placeholder="${store.get("restDefault", 60)}"></div>
                   <div class="field"><label>Cómo se hace</label><textarea class="input" data-path="${p}.notes">${h(e.notes || "")}</textarea></div>
                 </div>`;
               }).join("")}
@@ -661,6 +675,8 @@ $app.addEventListener("click", async (ev) => {
     const e = S.train.entries[d.check] || (S.train.entries[d.check] = {});
     e.done = !e.done; el.setAttribute("aria-pressed", String(e.done)); changed(); return;
   }
+  if (d.extimer) { startTimer({ kind: "ex", key: d.extimer, secs: +d.secs, label: d.label }); return; }
+  if (d.rest) { startTimer({ kind: "rest", key: d.rest, secs: +d.secs, label: d.label }); return; }
   if (d.addset) { const e = ensureEntry(d.addset, visibleRows(d.addset)); e.sets.push({ reps: "", kg: "" }); rerenderCard(d.addset); return; }
   if (d.delset) {
     const e = ensureEntry(d.delset, visibleRows(d.delset));
@@ -792,6 +808,90 @@ function renderLogin() {
     } catch (e) { err.textContent = e.message; err.hidden = false; }
   });
 }
+
+// ---------- timers ----------
+// One timer at a time, in its own layer so re-renders never reset it.
+// Counts from a fixed end time, so it stays right if the phone sleeps or the tab is throttled.
+const ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>';
+const $timer = document.createElement("div");
+$timer.className = "timer-layer";
+document.body.appendChild($timer);
+let T = null, tick = null, audio = null, wake = null;
+
+function beep(times = 3) {
+  try {
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    for (let i = 0; i < times; i++) {
+      const o = audio.createOscillator(), g = audio.createGain(), t0 = audio.currentTime + i * 0.28;
+      o.frequency.value = i === times - 1 ? 1320 : 880; o.type = "sine";
+      g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.5, t0 + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.22);
+      o.connect(g).connect(audio.destination); o.start(t0); o.stop(t0 + 0.24);
+    }
+  } catch {}
+  try { navigator.vibrate?.([200, 100, 200, 100, 400]); } catch {}
+}
+
+function startTimer({ kind, key, secs, label }) {
+  // first tap unlocks audio on iPhone
+  try { audio = audio || new (window.AudioContext || window.webkitAudioContext)(); audio.resume(); } catch {}
+  try { navigator.wakeLock?.request("screen").then((w) => { wake = w; }).catch(() => {}); } catch {}
+  T = { kind, key, label, total: secs, endAt: Date.now() + secs * 1000, startedAt: Date.now(), done: false, paused: null };
+  document.body.classList.add("has-timer");
+  clearInterval(tick); tick = setInterval(drawTimer, 250);
+  drawTimer();
+}
+function stopTimer() {
+  clearInterval(tick); T = null; $timer.innerHTML = "";
+  document.body.classList.remove("has-timer");
+  try { wake?.release(); } catch {} wake = null;
+}
+function finishTimer() {
+  T.done = true; beep();
+  if (T.kind === "ex" && S.train) {
+    const e = S.train.entries[T.key] || (S.train.entries[T.key] = {});
+    if (!e.done) {
+      e.done = true; changed();
+      $app.querySelectorAll(`[data-check="${CSS.escape(T.key)}"]`).forEach((b) => b.setAttribute("aria-pressed", "true"));
+    }
+    setTimeout(() => { if (T && T.kind === "ex" && T.done) stopTimer(); }, 2500);
+  }
+}
+function drawTimer() {
+  if (!T) return;
+  const now = T.paused ?? Date.now();
+  const left = (T.endAt - now) / 1000;
+  if (left <= 0 && !T.done) finishTimer();
+  if (!T) return;
+  const over = left <= 0;
+  const frac = Math.max(0, Math.min(1, left / T.total));
+  const title = T.kind === "rest" ? "Descanso" : "En curso";
+  $timer.innerHTML = `
+    <div class="timer ${over ? "over" : ""} ${T.kind}" role="timer" aria-live="off">
+      <div class="timer-bar" style="transform:scaleX(${frac})"></div>
+      <div class="timer-info">
+        <span class="timer-kind">${over ? (T.kind === "rest" ? "¡A la serie!" : "¡Listo!") : title}</span>
+        <span class="timer-label">${h(T.label)}</span>
+      </div>
+      <span class="timer-clock num">${over ? "+" : ""}${fmtClock(left > 0 ? Math.ceil(left) : left)}</span>
+      <div class="timer-btns">
+        ${over ? "" : `<button data-t="minus" aria-label="Restar 15 segundos">−15</button><button data-t="plus" aria-label="Sumar 15 segundos">+15</button>`}
+        ${!over ? `<button data-t="pause" aria-label="${T.paused ? "Seguir" : "Pausar"}">${T.paused ? "▶" : "❚❚"}</button>` : ""}
+        <button data-t="stop" class="stop" aria-label="Cerrar temporizador">✕</button>
+      </div>
+    </div>`;
+}
+$timer.addEventListener("click", (ev) => {
+  const b = ev.target.closest("[data-t]"); if (!b || !T) return;
+  const a = b.dataset.t;
+  if (a === "stop") return stopTimer();
+  if (a === "plus") { T.endAt += 15000; T.total += 15; }
+  if (a === "minus") { T.endAt -= 15000; T.total = Math.max(1, T.total - 15); }
+  if (a === "pause") {
+    if (T.paused) { T.endAt += Date.now() - T.paused; T.paused = null; } else T.paused = Date.now();
+  }
+  drawTimer();
+});
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && T) { drawTimer(); try { navigator.wakeLock?.request("screen").then((w) => { wake = w; }).catch(() => {}); } catch {} } });
 
 // Save before the app goes to background (phones kill tabs)
 document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") saveNow(); });

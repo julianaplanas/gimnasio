@@ -36,13 +36,17 @@ La sesión dura 4 meses, así que se abre directo.
 
 ## Cómo se usa
 
-**Entrenar** (atleta): elige el día según la fecha (lunes/miércoles/viernes). Cada ejercicio muestra lo que pidió la entrenadora, cómo se hace y lo que hiciste la última vez (también como sugerencia gris en cada casillero). Se guarda solo mientras escribís; si no hay señal en el gym, queda en el celular y se sube cuando vuelve la conexión. Para corregir un día pasado, cambiá la fecha o tocá *Editar* en Historial.
+**Entrenar** (atleta): elige el día según la fecha (lunes/miércoles/viernes). Cada ejercicio muestra lo que pidió la entrenadora, cómo se hace y lo que hiciste la última vez (también como sugerencia gris en cada casillero). Se guarda solo mientras escribís; si no hay señal en el gym, queda en el celular y se sube cuando vuelve la conexión. Los ejercicios por tiempo ("30 seg") tienen un botón ▶ que cuenta, suena al terminar y los marca hechos. Cada ejercicio con series tiene *Descanso*: un temporizador que suena al terminar y después sigue contando en verde, para ver cuánto te pasaste (por defecto 1:00; se puede fijar por ejercicio en el editor de rutinas). Para corregir un día pasado, cambiá la fecha o tocá *Editar* en Historial.
 
 **Progreso:** por ejercicio, el peso máximo de cada día y cuánto subió desde el primer registro. Un ejercicio mantiene su historial entre rutinas si se llama igual.
 
 **Historial:** cada entreno con sus series. La entrenadora puede dejar un comentario, que aparece en el entreno.
 
 **Rutinas:** la vigente y las anteriores. *Nueva rutina* permite pegar el mensaje de WhatsApp (con `OPENROUTER_API_KEY`), duplicar la vigente o empezar en blanco; siempre se revisa en el editor antes de guardar. Pueden cargarla tanto la atleta como la entrenadora.
+
+## Datos
+
+Todo vive en el Postgres de Railway, separado del código: los deploys nuevos no borran nada. La app solo crea tablas si no existen y solo carga la rutina inicial si no hay ninguna. Lo único que borra datos es eliminar el servicio de Postgres. Para un backup: en Railway, Postgres → *Backups* (o `pg_dump` con su `DATABASE_URL`).
 
 ## Local
 
