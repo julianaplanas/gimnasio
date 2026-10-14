@@ -269,12 +269,92 @@ function viewTrain() {
 function viewBlock(b, bi) {
   const allCheck = b.exercises.length && b.exercises.every((e) => e.mode === "check");
   const head = `<div class="block-head"><h2>${h(b.name)}</h2>${b.sets ? `<span class="sets">${h(b.sets)}</span>` : ""}</div>${b.notes ? `<p class="block-note">${h(b.notes)}</p>` : ""}`;
+  if (!allCheck && isCircuit(b)) return viewCircuit(b, bi, head);
   if (allCheck) {
     return `<section class="block">${head}<div class="card check-list">${b.exercises.map((e) => {
       return checkRow(e, false);
     }).join("")}</div></section>`;
   }
   return `<section class="block">${head}${b.exercises.map((e) => viewExercise(e)).join("")}</section>`;
+}
+
+// Dupletos / tripletos / cuartetos: exercises alternate, one round at a time
+const CIRCUIT_RE = /dupleto|tripleto|triplet0|cuarteto|circuito|superserie|bi-?serie|tri-?serie/i;
+function isCircuit(b) {
+  if (b.circuit === true || b.circuit === "si") return true;
+  if (b.circuit === false || b.circuit === "no") return false;
+  return CIRCUIT_RE.test(b.name || "") && b.exercises.filter((e) => e.mode !== "check").length > 1;
+}
+const LETTERS = "ABCDEFGH";
+
+function viewCircuit(b, bi, head) {
+  const t = S.train;
+  const checks = b.exercises.filter((e) => e.mode === "check");
+  const exs = b.exercises.filter((e) => e.mode !== "check");
+  const info = exs.map((e) => {
+    const last = lastFor(e.key, t.date, t.dayId);
+    return { e, last, lastSets: last ? setsOf(last.entries[e.key]) : [] };
+  });
+  const filled = Math.max(0, ...exs.map((e) => t.entries[e.key]?.sets?.length || 0));
+  const n = filled || parseInt(b.sets, 10) || Math.max(0, ...exs.map((e) => parseInt(e.sets, 10) || 0)) || 3;
+  const restSecs = Math.max(...exs.map(restOf));
+
+  const legend = info.map(({ e, last }, k) => {
+    const kgP = e.kg ? `<span class="pill kg-pill"><span class="plate ${plateClass(e.kg)}"></span>${h(e.kg)} kg</span>` : "";
+    return `<div class="cx">
+      <span class="letter">${LETTERS[k]}</span>
+      <div class="grow">
+        <div class="ex-name">${h(e.name)}</div>
+        <div class="target">${e.reps ? `<span class="pill">${h(e.reps)} reps</span>` : ""}${kgP}</div>
+        ${e.notes ? `<details class="how"><summary>Cómo se hace</summary><p>${h(e.notes)}</p></details>` : ""}
+        ${last ? `<div class="last"><span>Última vez, ${fmtShort(last.date)}:</span><b class="num">${h(setsText(last.entries[e.key].sets))}</b></div>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+
+  const rounds = Array.from({ length: n }, (_, i) => {
+    const items = info.map(({ e, lastSets }, k) => {
+      const s = t.entries[e.key]?.sets?.[i] || { reps: "", kg: "" };
+      const ph = (f) => { const x = lastSets[i] || lastSets[lastSets.length - 1]; return x ? fmtNum(x[f]) : ""; };
+      const withKg = e.mode !== "reps";
+      return `<div class="ri">
+        <span class="letter sm">${LETTERS[k]}</span>
+        <span class="ri-name">${h(e.name)}</span>
+        <div class="ri-inputs ${withKg ? "" : "no-kg"}">
+          <div class="cell"><input inputmode="numeric" data-set="${h(e.key)}" data-i="${i}" data-f="reps" data-block="${bi}" value="${h(s.reps ?? "")}" placeholder="${h(ph("reps"))}" aria-label="Ronda ${i + 1}, ${h(e.name)}, repeticiones"><span class="unit">reps</span></div>
+          ${withKg ? `<div class="cell"><input inputmode="decimal" data-set="${h(e.key)}" data-i="${i}" data-f="kg" data-block="${bi}" value="${h(s.kg ?? "")}" placeholder="${h(ph("kg"))}" aria-label="Ronda ${i + 1}, ${h(e.name)}, kilos"><span class="unit">kg</span></div>` : ""}
+        </div>
+      </div>`;
+    }).join("");
+    return `<div class="round ${roundDone(exs, i) ? "done" : ""}" data-round="${bi}-${i}">
+      <div class="round-head"><span class="round-n">Ronda ${i + 1}</span><span class="round-ok" aria-hidden="true">✓</span><span class="grow"></span>
+        <button class="btn ghost sm" data-rest="${h(exs[0].key)}" data-secs="${restSecs}" data-label="${h(b.name)} · ronda ${i + 1}">Descanso</button>
+        <button class="del" data-delround="${bi}" data-i="${i}" aria-label="Quitar ronda ${i + 1}">×</button></div>
+      ${items}
+    </div>`;
+  }).join("");
+
+  return `<section class="block" data-block="${bi}">${head}
+    ${checks.length ? `<div class="card check-list" style="margin-bottom:10px">${checks.map((e) => checkRow(e, false)).join("")}</div>` : ""}
+    <div class="card circuit">
+      <div class="cx-legend">${legend}</div>
+      <div class="rounds">${rounds}</div>
+      <div class="ex-actions"><button class="btn ghost sm" data-addround="${bi}">+ Ronda</button><span class="small muted">Alternás ${exs.map((_, k) => LETTERS[k]).join(" → ")} y repetís</span></div>
+    </div>
+  </section>`;
+}
+function roundDone(exs, i) {
+  return exs.every((e) => { const s = S.train.entries[e.key]?.sets?.[i]; return s && toNum(s.reps) != null; });
+}
+function circuitExercises(bi) {
+  const day = routineById(S.train.routineId).days.find((d) => d.id === S.train.dayId);
+  const b = day.blocks[bi];
+  return { b, exs: b.exercises.filter((e) => e.mode !== "check") };
+}
+function rerenderBlock(bi) {
+  const { b } = circuitExercises(bi);
+  const el = $app.querySelector(`section[data-block="${bi}"]`);
+  if (el) { const head = el.querySelector(".block-head").outerHTML + (el.querySelector(".block-note")?.outerHTML || ""); el.outerHTML = viewCircuit(b, bi, head); }
 }
 
 // "30 seg", "20 seg o 20 rep" → 30, 20
@@ -352,7 +432,7 @@ function ensureEntry(key, n) {
   while (e.sets.length < n) e.sets.push({ reps: "", kg: "" });
   return e;
 }
-const visibleRows = (key) => $app.querySelectorAll(`[data-card="${CSS.escape(key)}"] .set-row:not(.set-head)`).length;
+const visibleRows = (key) => $app.querySelectorAll(`input[data-set="${CSS.escape(key)}"][data-f="reps"]`).length;
 
 // ----- Progress -----
 function progressData() {
@@ -542,6 +622,10 @@ function viewEditor() {
                 <div class="field" style="max-width:110px"><label>Series</label><input class="input" data-path="days.${di}.blocks.${bi}.sets" value="${h(b.sets || "")}"></div>
                 <button class="x" data-ed="del-block" data-di="${di}" data-bi="${bi}" aria-label="Quitar bloque">×</button></div>
               <div class="field"><label>Indicaciones del bloque</label><input class="input" data-path="days.${di}.blocks.${bi}.notes" value="${h(b.notes || "")}"></div>
+              <div class="field"><label>Cómo se hacen</label><select class="input" data-path="days.${di}.blocks.${bi}.circuit">
+                <option value="no" ${!isCircuit(b) ? "selected" : ""}>Cada ejercicio con todas sus series</option>
+                <option value="si" ${isCircuit(b) ? "selected" : ""}>Alternados por ronda (dupleto, tripleto…)</option>
+              </select></div>
               ${b.exercises.map((e, ei) => {
                 const p = `days.${di}.blocks.${bi}.exercises.${ei}`;
                 return `<div class="ed-ex">
@@ -630,6 +714,10 @@ $app.addEventListener("input", (ev) => {
     const key = el.dataset.set, i = +el.dataset.i;
     const e = ensureEntry(key, Math.max(visibleRows(key), i + 1));
     e.sets[i][el.dataset.f] = el.value;
+    if (el.dataset.block) {
+      const { exs } = circuitExercises(+el.dataset.block);
+      $app.querySelector(`[data-round="${el.dataset.block}-${i}"]`)?.classList.toggle("done", roundDone(exs, i));
+    }
     changed();
   } else if (el.dataset.note !== undefined && S.train) {
     if (!S.train.entries[el.dataset.note]) S.train.entries[el.dataset.note] = {};
@@ -677,6 +765,21 @@ $app.addEventListener("click", async (ev) => {
   }
   if (d.extimer) { startTimer({ kind: "ex", key: d.extimer, secs: +d.secs, label: d.label }); return; }
   if (d.rest) { startTimer({ kind: "rest", key: d.rest, secs: +d.secs, label: d.label }); return; }
+  if (d.addround) {
+    const { exs } = circuitExercises(+d.addround);
+    const n = $app.querySelectorAll(`section[data-block="${d.addround}"] .round`).length;
+    exs.forEach((e) => { const en = ensureEntry(e.key, n); en.sets.push({ reps: "", kg: "" }); });
+    rerenderBlock(+d.addround); return;
+  }
+  if (d.delround) {
+    const { exs } = circuitExercises(+d.delround);
+    const n = $app.querySelectorAll(`section[data-block="${d.delround}"] .round`).length;
+    exs.forEach((e) => {
+      const en = ensureEntry(e.key, n);
+      if (en.sets.length > 1) en.sets.splice(+d.i, 1); else en.sets = [{ reps: "", kg: "" }];
+    });
+    rerenderBlock(+d.delround); changed(); return;
+  }
   if (d.addset) { const e = ensureEntry(d.addset, visibleRows(d.addset)); e.sets.push({ reps: "", kg: "" }); rerenderCard(d.addset); return; }
   if (d.delset) {
     const e = ensureEntry(d.delset, visibleRows(d.delset));

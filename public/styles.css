@@ -189,6 +189,36 @@ details.how p { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
 .set-head span { text-align: center; }
 .ex-actions { display: flex; gap: 4px; flex-wrap: wrap; justify-content: space-between; }
 
+/* Circuits: legend of exercises, then numbered rounds */
+.circuit { padding: 14px; display: grid; gap: 12px; }
+.cx-legend { display: grid; gap: 12px; }
+.cx { display: flex; gap: 10px; align-items: flex-start; }
+.letter {
+  width: 26px; height: 26px; border-radius: 6px; flex: none; display: grid; place-items: center;
+  background: var(--fg); color: var(--bg); font-family: var(--font-display); font-weight: 700; font-size: 16px;
+}
+.letter.sm { width: 22px; height: 22px; font-size: 14px; border-radius: 5px; }
+.rounds { display: grid; gap: 8px; }
+.round { border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 10px 10px; display: grid; gap: 8px; background: var(--bg); }
+.round-head { display: flex; align-items: center; gap: 6px; }
+.round-n { font-family: var(--font-display); font-weight: 700; font-size: 18px; text-transform: uppercase; letter-spacing: .03em; }
+.round-ok { display: none; width: 20px; height: 20px; border-radius: 50%; background: var(--ok); color: var(--bg); font-size: 12px; font-weight: 700; place-items: center; }
+.round.done { border-color: var(--ok); }
+.round.done .round-ok { display: grid; }
+.round .del { border: 0; background: none; color: var(--muted); font-size: 22px; line-height: 1; width: 32px; height: 32px; }
+.ri { display: grid; grid-template-columns: 22px 1fr; gap: 4px 8px; align-items: center; }
+.ri-name { font-size: 14px; font-weight: 700; line-height: 1.2; min-width: 0; }
+.ri-inputs { grid-column: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ri-inputs.no-kg { grid-template-columns: 1fr; }
+.ri-inputs .cell { position: relative; }
+.ri-inputs input {
+  width: 100%; text-align: center; font-size: 20px; font-weight: 700; padding: 8px 40px 8px 10px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--surface); font-variant-numeric: tabular-nums;
+}
+.ri-inputs input::placeholder { color: var(--muted); opacity: .55; font-weight: 400; }
+.ri-inputs .unit { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 12px; color: var(--muted); pointer-events: none; }
+.circuit .ex-actions { align-items: center; }
+
 .check-list { padding: 4px 0; }
 .check-row { display: flex; align-items: center; border-top: 1px solid var(--line); }
 .check-row:first-child { border-top: 0; }

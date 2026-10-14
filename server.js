@@ -298,10 +298,11 @@ app.post("/api/routines/parse", auth, wrap(async (req, res) => {
 
   const prompt = `Convertí esta rutina de gimnasio (texto de WhatsApp de una entrenadora) a JSON.
 Hoy es ${today}. Respondé SOLO con JSON válido, sin texto extra, con esta forma:
-{"name":"Mes N","from":"YYYY-MM-DD","to":"YYYY-MM-DD","days":[{"id":"lunes","name":"Lunes","blocks":[{"name":"Glúteos","sets":"3 series","notes":"","exercises":[{"key":"hip-thrust","name":"Hip thrust","mode":"peso","sets":"3","reps":"8–10","kg":"40+","rest":"60","notes":""}]}]}]}
+{"name":"Mes N","from":"YYYY-MM-DD","to":"YYYY-MM-DD","days":[{"id":"lunes","name":"Lunes","blocks":[{"name":"Glúteos","sets":"3 series","notes":"","circuit":false,"exercises":[{"key":"hip-thrust","name":"Hip thrust","mode":"peso","sets":"3","reps":"8–10","kg":"40+","rest":"60","notes":""}]}]}]}
 
 Reglas:
 - Días: si un día no tiene título, es lunes. Ids en minúscula sin tildes (lunes, martes, miercoles, jueves, viernes, sabado, domingo).
+- "circuit": true si los ejercicios del bloque se alternan por ronda (dupleto, tripleto, cuarteto, "alternás", "repetís 2 veces"); si no, false.
 - "mode": "peso" si lleva carga, "reps" si solo repeticiones, "check" para ejercicios de entrada en calor o por tiempo.
 - "rest": segundos de descanso entre series solo si la entrenadora lo indica (ej. "1 minuto" → "60"); si no, "".
 - Para ejercicios por tiempo poné el tiempo en "reps" con "seg" (ej. "30 seg").
