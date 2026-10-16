@@ -205,6 +205,7 @@ details.how p { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
 .round-ok { display: none; width: 20px; height: 20px; border-radius: 50%; background: var(--ok); color: var(--bg); font-size: 12px; font-weight: 700; place-items: center; }
 .round.done { border-color: var(--ok); }
 .round.done .round-ok { display: grid; }
+.round .copy { padding: 4px 10px; font-size: 13px; color: var(--accent); border-color: var(--accent); background: none; }
 .round .del { border: 0; background: none; color: var(--muted); font-size: 22px; line-height: 1; width: 32px; height: 32px; }
 .ri { display: grid; grid-template-columns: 22px 1fr; gap: 4px 8px; align-items: center; }
 .ri-name { font-size: 14px; font-weight: 700; line-height: 1.2; min-width: 0; }

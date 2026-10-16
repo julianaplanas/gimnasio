@@ -328,6 +328,7 @@ function viewCircuit(b, bi, head) {
     }).join("");
     return `<div class="round ${roundDone(exs, i) ? "done" : ""}" data-round="${bi}-${i}">
       <div class="round-head"><span class="round-n">Ronda ${i + 1}</span><span class="round-ok" aria-hidden="true">✓</span><span class="grow"></span>
+        ${i > 0 ? `<button class="btn sm copy" data-copyround="${bi}" data-i="${i}" aria-label="Copiar los valores de la ronda ${i}">= Ronda ${i}</button>` : ""}
         <button class="btn ghost sm" data-rest="${h(exs[0].key)}" data-secs="${restSecs}" data-label="${h(b.name)} · ronda ${i + 1}">Descanso</button>
         <button class="del" data-delround="${bi}" data-i="${i}" aria-label="Quitar ronda ${i + 1}">×</button></div>
       ${items}
@@ -405,6 +406,7 @@ function viewExercise(e) {
     </div>
     <div class="ex-actions">
       <button class="btn ghost sm" data-addset="${h(e.key)}">+ Serie</button>
+      <button class="btn ghost sm" data-repeatset="${h(e.key)}">Repetir serie</button>
       <button class="btn ghost sm" data-rest="${h(e.key)}" data-secs="${restOf(e)}" data-label="${h(e.name)}">Descanso ${fmtClock(restOf(e))}</button>
       ${lastSets.length ? `<button class="btn ghost sm" data-copylast="${h(e.key)}">Copiar última vez</button>` : ""}
       ${note ? "" : `<button class="btn ghost sm" data-addnote="${h(e.key)}">+ Nota</button>`}
@@ -765,6 +767,29 @@ $app.addEventListener("click", async (ev) => {
   }
   if (d.extimer) { startTimer({ kind: "ex", key: d.extimer, secs: +d.secs, label: d.label }); return; }
   if (d.rest) { startTimer({ kind: "rest", key: d.rest, secs: +d.secs, label: d.label }); return; }
+  if (d.copyround) {
+    const bi = +d.copyround, i = +d.i;
+    const { exs } = circuitExercises(bi);
+    const n = $app.querySelectorAll(`section[data-block="${bi}"] .round`).length;
+    exs.forEach((e) => {
+      const en = ensureEntry(e.key, n);
+      const prev = en.sets[i - 1];
+      if (prev && (toNum(prev.reps) != null || toNum(prev.kg) != null)) en.sets[i] = { reps: prev.reps ?? "", kg: prev.kg ?? "" };
+    });
+    rerenderBlock(bi); changed(); return;
+  }
+  if (d.repeatset) {
+    // copy the last filled set into the next empty row (or a new row)
+    const key = d.repeatset;
+    const en = ensureEntry(key, visibleRows(key));
+    let last = -1;
+    en.sets.forEach((x, k) => { if (toNum(x.reps) != null || toNum(x.kg) != null) last = k; });
+    if (last < 0) return;
+    const src = en.sets[last];
+    if (last + 1 < en.sets.length) en.sets[last + 1] = { reps: src.reps ?? "", kg: src.kg ?? "" };
+    else en.sets.push({ reps: src.reps ?? "", kg: src.kg ?? "" });
+    rerenderCard(key); changed(); return;
+  }
   if (d.addround) {
     const { exs } = circuitExercises(+d.addround);
     const n = $app.querySelectorAll(`section[data-block="${d.addround}"] .round`).length;
