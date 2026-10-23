@@ -51,6 +51,11 @@ async function migrate() {
       created_at TIMESTAMPTZ DEFAULT now(),
       updated_at TIMESTAMPTZ DEFAULT now()
     );
+    CREATE TABLE IF NOT EXISTS athlete_settings (
+      athlete_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+      data JSONB NOT NULL DEFAULT '{}',
+      updated_at TIMESTAMPTZ DEFAULT now()
+    );
     CREATE TABLE IF NOT EXISTS sessions (
       id SERIAL PRIMARY KEY,
       athlete_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -374,6 +379,28 @@ app.delete("/api/sessions/:id", auth, wrap(async (req, res) => {
   const aid = await athleteFor(req);
   await q("DELETE FROM sessions WHERE id=$1 AND athlete_id=$2", [req.params.id, aid]);
   res.json({ ok: true });
+}));
+
+// ---------- Settings (e.g. which exercises count as the same one) ----------
+app.get("/api/settings", auth, wrap(async (req, res) => {
+  const aid = await athleteFor(req);
+  const { rows } = await q("SELECT data FROM athlete_settings WHERE athlete_id=$1", [aid]);
+  res.json(rows[0]?.data || {});
+}));
+
+app.put("/api/settings", auth, wrap(async (req, res) => {
+  const aid = await athleteFor(req);
+  const merge = req.body?.merge;
+  if (!merge || typeof merge !== "object" || Array.isArray(merge)) return res.status(400).json({ error: "Datos inválidos." });
+  const clean = {};
+  for (const [k, v] of Object.entries(merge)) if (typeof v === "string" && k !== v && k.length < 100 && v.length < 100) clean[k] = v;
+  const { rows } = await q(
+    `INSERT INTO athlete_settings (athlete_id, data) VALUES ($1, $2)
+     ON CONFLICT (athlete_id) DO UPDATE SET data = athlete_settings.data || EXCLUDED.data, updated_at = now()
+     RETURNING data`,
+    [aid, JSON.stringify({ merge: clean })]
+  );
+  res.json(rows[0].data);
 }));
 
 app.get("/healthz", (req, res) => res.send("ok"));

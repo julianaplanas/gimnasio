@@ -308,6 +308,7 @@ body.has-timer .savebar { bottom: calc(var(--tabbar) + 84px + env(safe-area-inse
 .tbl td, .tbl th { padding: 9px 14px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
 .tbl th { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 400; border-top: 0; }
 .back { margin-top: 12px; }
+.merge { padding: 12px 14px; margin-top: 10px; display: grid; gap: 8px; }
 
 /* ---------- History ---------- */
 .sess { padding: 0; overflow: hidden; }

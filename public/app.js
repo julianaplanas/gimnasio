@@ -5,7 +5,7 @@ const DAY_IDS = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes",
 
 const S = {
   me: null, athletes: [], athleteId: null, canParse: false,
-  routines: [], sessions: [],
+  routines: [], sessions: [], settings: { merge: {} }, mergeOpen: false,
   tab: null,
   train: null,          // { routineId, dayId, date, entries, note, coach_note, sessionId }
   progressKey: null,
@@ -68,9 +68,23 @@ function exerciseIndex() {
 const setsOf = (entry) => (entry?.sets || []).filter((s) => toNum(s.reps) != null || toNum(s.kg) != null);
 const entryHasData = (e) => !!e && (e.done || setsOf(e).length > 0 || (e.note || "").trim());
 
+// Exercises the user unified ("son el mismo ejercicio") resolve to one key
+function canon(key) {
+  const m = S.settings.merge || {};
+  let k = key, n = 0;
+  while (m[k] && n++ < 10) k = m[k];
+  return k;
+}
+function entryLike(s, key) {
+  if (setsOf(s.entries[key]).length) return s.entries[key];
+  const c = canon(key);
+  const k = Object.keys(s.entries || {}).find((x) => canon(x) === c && setsOf(s.entries[x]).length);
+  return k ? s.entries[k] : null;
+}
 function lastFor(key, date, dayId) {
-  const list = S.sessions.filter((s) => !(s.date === date && s.day_id === dayId) && setsOf(s.entries[key]).length);
-  return list.find((s) => s.date <= date) || list[0] || null;
+  const list = S.sessions.filter((s) => !(s.date === date && s.day_id === dayId) && entryLike(s, key));
+  const s = list.find((x) => x.date <= date) || list[0];
+  return s ? { date: s.date, entries: { [key]: entryLike(s, key) } } : null;
 }
 function setsText(sets) {
   return setsOf({ sets }).map((s) => {
@@ -103,8 +117,10 @@ async function boot() {
 }
 
 async function loadData() {
-  const [routines, sessions] = await Promise.all([api("GET", "/api/routines"), api("GET", "/api/sessions")]);
-  S.routines = routines; S.sessions = sessions;
+  const [routines, sessions, settings] = await Promise.all([
+    api("GET", "/api/routines"), api("GET", "/api/sessions"), api("GET", "/api/settings").catch(() => ({})),
+  ]);
+  S.routines = routines; S.sessions = sessions; S.settings = { merge: {}, ...settings };
   if (!isCoach()) initTrain();
 }
 
@@ -441,20 +457,26 @@ function progressData() {
   const idx = exerciseIndex();
   const map = new Map();
   [...S.sessions].sort((a, b) => a.date.localeCompare(b.date)).forEach((s) => {
-    for (const [key, e] of Object.entries(s.entries || {})) {
+    for (const [raw, e] of Object.entries(s.entries || {})) {
       const sets = setsOf(e); if (!sets.length) continue;
-      const kgs = sets.map((x) => toNum(x.kg)).filter((x) => x != null);
-      if (!map.has(key)) map.set(key, { key, name: idx.get(key)?.name || key, all: [] });
-      map.get(key).all.push({
-        date: s.date, sets,
-        kg: kgs.length ? Math.max(...kgs) : null,
-        reps: Math.max(...sets.map((x) => toNum(x.reps) || 0)),
-      });
+      const key = canon(raw);
+      if (!map.has(key)) map.set(key, { key, name: idx.get(key)?.name || idx.get(raw)?.name || key, members: new Set(), all: [] });
+      const it = map.get(key);
+      it.members.add(raw);
+      // two unified exercises on the same day count as one day
+      const same = it.all.find((p) => p.date === s.date);
+      if (same) same.sets = [...same.sets, ...sets];
+      else it.all.push({ date: s.date, sets });
     }
   });
   // Only compare like with like: if the latest day has weight, chart the kg days;
   // if it doesn't (bodyweight, tobillera), chart the reps days.
   return [...map.values()].map((it) => {
+    it.all.forEach((p) => {
+      const kgs = p.sets.map((x) => toNum(x.kg)).filter((x) => x != null);
+      p.kg = kgs.length ? Math.max(...kgs) : null;
+      p.reps = Math.max(...p.sets.map((x) => toNum(x.reps) || 0));
+    });
     const unit = it.all.at(-1).kg != null ? "kg" : "reps";
     const pts = it.all.filter((p) => (unit === "kg" ? p.kg != null : p.kg == null)).map((p) => ({ ...p, top: unit === "kg" ? p.kg : p.reps }));
     return { ...it, unit, pts };
@@ -487,10 +509,32 @@ function bigChart(item) {
   const lbl = `<text x="${Math.min(X(pts.length - 1), W - R - 4)}" y="${Y(lastP.top) - 12}" text-anchor="end" style="fill:var(--fg);font-size:13px;font-weight:700">${fmtNum(lastP.top)} ${item.unit}</text>`;
   return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Evolución de ${h(item.name)}">${grid}${area}<polyline points="${line}" style="fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linejoin:round"/>${dots}${lbl}${xl}</svg>`;
 }
+function viewMerge(item, data) {
+  const idx = exerciseIndex();
+  const nameOf = (k) => idx.get(k)?.name || k;
+  const members = [...item.members].filter((k) => k !== item.key);
+  const others = data.filter((d) => d.key !== item.key);
+  return `<div class="card merge">
+    ${members.length ? `<div class="small muted">Incluye también:</div>
+      ${members.map((k) => `<div class="row"><span class="grow small"><b>${h(nameOf(k))}</b></span><button class="btn ghost sm" data-unmerge="${h(k)}">Separar</button></div>`).join("")}` : ""}
+    ${S.mergeOpen
+      ? `<div class="field"><label for="merge-sel">Es el mismo ejercicio que…</label>
+          <select class="input" id="merge-sel"><option value="">Elegí un ejercicio</option>${others.map((o) => `<option value="${h(o.key)}">${h(o.name)}</option>`).join("")}</select></div>
+         <div class="row"><button class="btn primary sm" data-act="do-merge">Unificar</button><button class="btn sm" data-act="cancel-merge">Cancelar</button></div>
+         <div class="small muted">Se ven juntos en Progreso y en "Última vez". Lo anotado no cambia y se puede separar después.</div>`
+      : (others.length ? `<button class="btn ghost sm" data-act="open-merge">Unificar con otro ejercicio</button>` : "")}
+  </div>`;
+}
+async function saveMerge(next) {
+  const prev = S.settings.merge;
+  S.settings.merge = next; render();
+  try { const r = await api("PUT", "/api/settings", { merge: next }); S.settings = { merge: {}, ...r }; S.settings.merge = next; }
+  catch (e) { if (!e.silent) { S.settings.merge = prev; render(); } }
+}
 function viewProgress() {
   const data = progressData();
   if (S.progressKey) {
-    const item = data.find((d) => d.key === S.progressKey);
+    const item = data.find((d) => d.key === canon(S.progressKey));
     if (item) {
       const first = item.pts[0].top, last = item.pts.at(-1).top, d = last - first;
       return `
@@ -503,6 +547,7 @@ function viewProgress() {
         </div>
         <div class="card chart-wrap" style="margin-top:10px">${bigChart(item)}</div>
         ${item.all.length > item.pts.length ? `<p class="small muted">El gráfico muestra ${item.unit === "kg" ? "el peso máximo de los días que usaste peso" : "las reps de los días sin peso"}. ${item.all.length - item.pts.length === 1 ? "Un día quedó" : `${item.all.length - item.pts.length} días quedaron`} afuera; están en el registro.</p>` : ""}
+        ${viewMerge(item, data)}
         <div class="section-title">Registro</div>
         <div class="card" style="overflow-x:auto"><table class="tbl"><thead><tr><th>Fecha</th><th>Series</th></tr></thead><tbody>
           ${[...item.all].reverse().map((p) => `<tr><td style="white-space:nowrap">${fmtDay(p.date)}</td><td class="num">${h(setsText(p.sets))}</td></tr>`).join("")}
@@ -830,6 +875,14 @@ $app.addEventListener("click", async (ev) => {
     el.hidden = true;
     const inp = $app.querySelector(`[data-note="${CSS.escape(d.addnote)}"]`); inp.hidden = false; inp.focus(); return;
   }
+  if (d.unmerge) {
+    const k = d.unmerge, next = { ...S.settings.merge };
+    // detach k; keys that pointed through k keep pointing at the group
+    const root = canon(k);
+    for (const x of Object.keys(next)) if (next[x] === k) next[x] = root;
+    delete next[k];
+    await saveMerge(next); return;
+  }
   if (d.prog) { S.progressKey = d.prog; render(); window.scrollTo(0, 0); return; }
   if (d.sess) { S.openSession = S.openSession === +d.sess ? null : +d.sess; S.confirmDelete = null; render(); return; }
   if (d.askdel) { S.confirmDelete = +d.askdel; render(); return; }
@@ -888,7 +941,21 @@ $app.addEventListener("click", async (ev) => {
       } catch (e) { msg.textContent = e.message; msg.className = "small err"; }
       break;
     }
-    case "prog-back": S.progressKey = null; render(); break;
+    case "prog-back": S.progressKey = null; S.mergeOpen = false; render(); break;
+    case "open-merge": S.mergeOpen = true; render(); break;
+    case "cancel-merge": S.mergeOpen = false; render(); break;
+    case "do-merge": {
+      const target = document.getElementById("merge-sel").value; if (!target) break;
+      const from = canon(S.progressKey), to = canon(target);
+      if (from === to) break;
+      const next = { ...S.settings.merge };
+      // everything that pointed at `from` now points at `to`
+      for (const k of Object.keys(next)) if (canon(k) === from) next[k] = to;
+      next[from] = to;
+      S.mergeOpen = false; S.progressKey = to;
+      await saveMerge(next);
+      break;
+    }
     case "cancel-del": S.confirmDelete = null; render(); break;
     case "cancel-rt": S.confirmRoutine = null; render(); break;
     case "new-routine": S.sheet = "new-routine"; render(); break;
