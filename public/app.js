@@ -444,13 +444,21 @@ function progressData() {
     for (const [key, e] of Object.entries(s.entries || {})) {
       const sets = setsOf(e); if (!sets.length) continue;
       const kgs = sets.map((x) => toNum(x.kg)).filter((x) => x != null);
-      const useKg = kgs.length > 0;
-      const top = useKg ? Math.max(...kgs) : Math.max(...sets.map((x) => toNum(x.reps) || 0));
-      if (!map.has(key)) map.set(key, { key, name: idx.get(key)?.name || key, unit: useKg ? "kg" : "reps", pts: [] });
-      map.get(key).pts.push({ date: s.date, top, sets, vol: sets.reduce((a, x) => a + (toNum(x.reps) || 0) * (toNum(x.kg) || 0), 0) });
+      if (!map.has(key)) map.set(key, { key, name: idx.get(key)?.name || key, all: [] });
+      map.get(key).all.push({
+        date: s.date, sets,
+        kg: kgs.length ? Math.max(...kgs) : null,
+        reps: Math.max(...sets.map((x) => toNum(x.reps) || 0)),
+      });
     }
   });
-  return [...map.values()].sort((a, b) => b.pts.at(-1).date.localeCompare(a.pts.at(-1).date) || a.name.localeCompare(b.name));
+  // Only compare like with like: if the latest day has weight, chart the kg days;
+  // if it doesn't (bodyweight, tobillera), chart the reps days.
+  return [...map.values()].map((it) => {
+    const unit = it.all.at(-1).kg != null ? "kg" : "reps";
+    const pts = it.all.filter((p) => (unit === "kg" ? p.kg != null : p.kg == null)).map((p) => ({ ...p, top: unit === "kg" ? p.kg : p.reps }));
+    return { ...it, unit, pts };
+  }).sort((a, b) => b.all.at(-1).date.localeCompare(a.all.at(-1).date) || a.name.localeCompare(b.name));
 }
 function sparkline(pts) {
   const w = 84, hgt = 30, p = 3;
@@ -490,13 +498,14 @@ function viewProgress() {
         <div class="section-title">${h(item.name)}</div>
         <div class="stats">
           <div class="card stat"><div class="v num">${fmtNum(last)}</div><div class="l">Máx. último (${item.unit})</div></div>
-          <div class="card stat"><div class="v num">${d > 0 ? "+" : ""}${fmtNum(d)}</div><div class="l">Desde el ${fmtShort(item.pts[0].date)}</div></div>
-          <div class="card stat"><div class="v num">${item.pts.length}</div><div class="l">Veces registrado</div></div>
+          <div class="card stat"><div class="v num">${item.pts.length < 2 ? "—" : `${d > 0 ? "+" : ""}${fmtNum(d)}`}</div><div class="l">${item.pts.length < 2 ? "Primera vez con " + (item.unit === "kg" ? "peso" : "solo reps") : "Desde el " + fmtShort(item.pts[0].date)}</div></div>
+          <div class="card stat"><div class="v num">${item.all.length}</div><div class="l">Veces registrado</div></div>
         </div>
         <div class="card chart-wrap" style="margin-top:10px">${bigChart(item)}</div>
+        ${item.all.length > item.pts.length ? `<p class="small muted">El gráfico muestra ${item.unit === "kg" ? "el peso máximo de los días que usaste peso" : "las reps de los días sin peso"}. ${item.all.length - item.pts.length === 1 ? "Un día quedó" : `${item.all.length - item.pts.length} días quedaron`} afuera; están en el registro.</p>` : ""}
         <div class="section-title">Registro</div>
         <div class="card" style="overflow-x:auto"><table class="tbl"><thead><tr><th>Fecha</th><th>Series</th></tr></thead><tbody>
-          ${[...item.pts].reverse().map((p) => `<tr><td style="white-space:nowrap">${fmtDay(p.date)}</td><td class="num">${h(setsText(p.sets))}</td></tr>`).join("")}
+          ${[...item.all].reverse().map((p) => `<tr><td style="white-space:nowrap">${fmtDay(p.date)}</td><td class="num">${h(setsText(p.sets))}</td></tr>`).join("")}
         </tbody></table></div>`;
     }
     S.progressKey = null;
@@ -519,9 +528,9 @@ function viewProgress() {
       ${data.map((it) => {
         const d = it.pts.at(-1).top - it.pts[0].top;
         const cls = it.pts.length < 2 ? "flat" : d > 0 ? "up" : d < 0 ? "down" : "flat";
-        const dtxt = it.pts.length < 2 ? "1 registro" : d === 0 ? "igual" : `${d > 0 ? "+" : ""}${fmtNum(d)} ${it.unit}`;
+        const dtxt = it.pts.length < 2 ? (it.all.length > 1 ? (it.unit === "kg" ? "1ª vez con peso" : "1ª vez sin peso") : "1 registro") : d === 0 ? "igual" : `${d > 0 ? "+" : ""}${fmtNum(d)} ${it.unit}`;
         return `<button class="prog-item" data-prog="${h(it.key)}">
-          <span><span class="name">${h(it.name)}</span><br><span class="sub">Último: ${fmtShort(it.pts.at(-1).date)}</span></span>
+          <span><span class="name">${h(it.name)}</span><br><span class="sub">Último: ${fmtShort(it.all.at(-1).date)}</span></span>
           ${sparkline(it.pts)}
           <span class="val num">${fmtNum(it.pts.at(-1).top)}<small style="font-size:13px"> ${it.unit}</small><span class="delta ${cls}">${dtxt}</span></span>
         </button>`;
