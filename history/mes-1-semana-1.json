@@ -1,0 +1,258 @@
+{
+ "id": "mes-1-semana-1",
+ "routine": {
+  "name": "Mes 1 · semana 1",
+  "from": "2026-06-15",
+  "to": "2026-06-21",
+  "days": [
+   {
+    "id": "viernes",
+    "name": "Día 3",
+    "blocks": [
+     {
+      "name": "Entrada en calor",
+      "sets": "",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "abs-crunch",
+        "name": "Crunch",
+        "mode": "check",
+        "reps": "20 reps"
+       },
+       {
+        "key": "abs-inferiores-calor",
+        "name": "Abdominales inferiores",
+        "mode": "check",
+        "reps": "10 y 10 reps"
+       },
+       {
+        "key": "abs-plancha",
+        "name": "Plancha sobre antebrazos",
+        "mode": "check",
+        "reps": "30 seg"
+       }
+      ]
+     },
+     {
+      "name": "Dupleto",
+      "sets": "3 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "sentadilla-disco",
+        "name": "Sentadilla con disco + hombro",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10",
+        "kg": "10"
+       },
+       {
+        "key": "abs-plancha",
+        "name": "Plancha sobre antebrazos",
+        "mode": "check",
+        "reps": "30 seg"
+       }
+      ],
+      "circuit": "si"
+     },
+     {
+      "name": "Dupleto",
+      "sets": "2 series",
+      "notes": "Repetís 3 y 4 dos veces.",
+      "exercises": [
+       {
+        "key": "swing-1-mano",
+        "name": "Swing a 1 o 2 manos (kettlebell)",
+        "mode": "peso",
+        "sets": "2",
+        "reps": "40 seg",
+        "kg": "8–12",
+        "notes": "Solo swing; si podés, intercambiá las manos."
+       },
+       {
+        "key": "plancha-lateral",
+        "name": "Plancha lateral (oblicuos)",
+        "mode": "check",
+        "reps": "30–40 seg"
+       }
+      ],
+      "circuit": "no"
+     },
+     {
+      "name": "Glúteos",
+      "sets": "",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "puente-gluteo",
+        "name": "Puente de glúteo (A + B con aductores)",
+        "mode": "peso",
+        "sets": "2",
+        "reps": "15",
+        "kg": "15+",
+        "notes": "A: levantás la cadera apretando glúteos. B: igual, juntando y alejando rodillas con la cadera arriba. Antes 5 reps sin carga."
+       },
+       {
+        "key": "kickback-polea",
+        "name": "Kickback (patada de glúteo) en polea",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–12",
+        "notes": "Pie hacia afuera (rotación externa de cadera) con suave flexión de rodilla. Sin molestar la zona lumbar."
+       },
+       {
+        "key": "abs-inferiores",
+        "name": "Abdominales inferiores",
+        "mode": "reps",
+        "reps": "10×4 (40)"
+       }
+      ]
+     },
+     {
+      "name": "Dupleto",
+      "sets": "3 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "biceps-mancuernas",
+        "name": "Bíceps: flexión de codo",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10 c/brazo",
+        "kg": "4–7"
+       },
+       {
+        "key": "triceps-tras-nuca",
+        "name": "Tríceps: extensión tras nuca",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10",
+        "kg": "5+",
+        "notes": "Mancuerna atrás de la cabeza con ambas manos."
+       }
+      ],
+      "circuit": "si"
+     }
+    ]
+   }
+  ]
+ },
+ "note": "Fechas estimadas: cada ✅ es una semana, en orden.",
+ "sessions": [
+  {
+   "date": "2026-06-19",
+   "day_id": "viernes",
+   "entries": {
+    "abs-crunch": {
+     "done": true
+    },
+    "abs-inferiores-calor": {
+     "done": true
+    },
+    "abs-plancha": {
+     "done": true,
+     "note": "30 s"
+    },
+    "sentadilla-disco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ]
+    },
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": null,
+       "kg": 8
+      },
+      {
+       "reps": null,
+       "kg": 8
+      }
+     ],
+     "note": "40 seg"
+    },
+    "plancha-lateral": {
+     "done": true,
+     "note": "30 s"
+    },
+    "puente-gluteo": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 20
+      },
+      {
+       "reps": 15,
+       "kg": 20
+      }
+     ]
+    },
+    "kickback-polea": {
+     "sets": [
+      {
+       "reps": null,
+       "kg": 7.5
+      },
+      {
+       "reps": null,
+       "kg": 7.5
+      },
+      {
+       "reps": null,
+       "kg": 7.5
+      }
+     ]
+    },
+    "abs-inferiores": {
+     "note": "No me acuerdo!!!"
+    },
+    "biceps-mancuernas": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "Barra de 10 kg con dos brazos"
+    },
+    "triceps-tras-nuca": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    }
+   },
+   "note": ""
+  }
+ ]
+}

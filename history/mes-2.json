@@ -1,0 +1,1846 @@
+{
+ "id": "mes-2",
+ "routine": {
+  "name": "Mes 2",
+  "from": "2026-07-13",
+  "to": "2026-08-16",
+  "days": [
+   {
+    "id": "lunes",
+    "name": "Lunes",
+    "blocks": [
+     {
+      "name": "Tripleto",
+      "sets": "4 series",
+      "notes": "Al ser 4 vueltas, en la 3ª podés subir la carga y bajar a 8 reps; en la 4ª volvés a la carga anterior.",
+      "exercises": [
+       {
+        "key": "hip-thrust",
+        "name": "Hip thrust",
+        "mode": "peso",
+        "sets": "4",
+        "reps": "10–12",
+        "kg": "25–30+",
+        "notes": "Subís, aguantás 2 seg y bajás en 2 seg."
+       },
+       {
+        "key": "abs-situp",
+        "name": "Sit up",
+        "mode": "reps",
+        "sets": "4",
+        "reps": "10/12/15/15"
+       },
+       {
+        "key": "abs-plancha",
+        "name": "Plancha baja",
+        "mode": "check",
+        "reps": "20–30 seg"
+       }
+      ],
+      "circuit": "si"
+     },
+     {
+      "name": "Espalda y glúteos",
+      "sets": "",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "dorsales-prono",
+        "name": "Dorsales, toma prona",
+        "mode": "peso",
+        "sets": "2",
+        "reps": "10–12",
+        "kg": "30"
+       },
+       {
+        "key": "dorsales-supino",
+        "name": "Dorsales, toma supina",
+        "mode": "peso",
+        "sets": "2",
+        "reps": "10–12",
+        "kg": "30"
+       },
+       {
+        "key": "kickback-polea",
+        "name": "Kickback (patada de glúteo) en polea",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "15",
+        "kg": "7.5–9"
+       },
+       {
+        "key": "abductores-maquina",
+        "name": "Máquina de abductores",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–12",
+        "kg": "30–40"
+       },
+       {
+        "key": "patada-lateral-polea",
+        "name": "Patada de costado en polea (reemplazo)",
+        "mode": "peso",
+        "reps": "10",
+        "kg": "5"
+       },
+       {
+        "key": "aductores-maquina",
+        "name": "Máquina de aductores",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–12",
+        "kg": "30–40"
+       },
+       {
+        "key": "remo-unilateral",
+        "name": "Remo unilateral",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–12 c/lado",
+        "kg": "8–12"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "miercoles",
+    "name": "Miércoles",
+    "blocks": [
+     {
+      "name": "Piernas y pecho",
+      "sets": "",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "sentadilla-disco",
+        "name": "Sentadilla con disco (A arriba / B lateral con bíceps)",
+        "mode": "peso",
+        "sets": "4",
+        "reps": "10",
+        "kg": "10"
+       },
+       {
+        "key": "press-pecho-banco",
+        "name": "Press de pecho en banco plano",
+        "mode": "peso",
+        "sets": "2–3",
+        "reps": "10–12",
+        "kg": "22.5"
+       },
+       {
+        "key": "apertura-banco",
+        "name": "Apertura en banco plano con mancuernas",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10",
+        "kg": "5–7 c/mano"
+       },
+       {
+        "key": "estocada-biceps",
+        "name": "Estocada atrás con bíceps",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "20",
+        "kg": "5–6 c/mano"
+       },
+       {
+        "key": "leg-press",
+        "name": "Leg press (reemplazo)",
+        "mode": "peso",
+        "reps": "10"
+       },
+       {
+        "key": "leg-extension",
+        "name": "Leg extension (reemplazo)",
+        "mode": "peso",
+        "reps": "10"
+       }
+      ]
+     },
+     {
+      "name": "Hombros",
+      "sets": "3 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "vuelo-frontal",
+        "name": "Vuelo frontal",
+        "mode": "peso",
+        "reps": "8–10",
+        "kg": "4"
+       },
+       {
+        "key": "vuelo-lateral",
+        "name": "Vuelo lateral",
+        "mode": "peso",
+        "reps": "8–10",
+        "kg": "4"
+       }
+      ],
+      "circuit": "si"
+     },
+     {
+      "name": "Dupleto",
+      "sets": "3 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "swing-1-mano",
+        "name": "Swing (kettlebell)",
+        "mode": "peso",
+        "reps": "10–12",
+        "kg": "12"
+       },
+       {
+        "key": "triceps-tras-nuca",
+        "name": "Tríceps: extensión tras nuca",
+        "mode": "peso",
+        "reps": "15",
+        "kg": "5",
+        "notes": "Si podés, pasá a 6 kg y hacé 8–10 reps."
+       }
+      ],
+      "circuit": "si"
+     },
+     {
+      "name": "Final",
+      "sets": "",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "sentadilla-bulgara",
+        "name": "Sentadilla búlgara",
+        "mode": "reps",
+        "sets": "1–2",
+        "reps": "10 por pierna"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "viernes",
+    "name": "Viernes",
+    "blocks": [
+     {
+      "name": "Cuarteto",
+      "sets": "2 series",
+      "notes": "12 reps de cada uno con la carga que venís haciendo. Antes, 10 sentadillas sin carga.",
+      "exercises": [
+       {
+        "key": "swing-1-mano",
+        "name": "Swing a 1 mano",
+        "mode": "peso",
+        "reps": "12"
+       },
+       {
+        "key": "puente-gluteo",
+        "name": "Puente con carga",
+        "mode": "peso",
+        "reps": "12"
+       },
+       {
+        "key": "hip-thrust",
+        "name": "Hip thrust",
+        "mode": "peso",
+        "reps": "12"
+       },
+       {
+        "key": "sentadilla-bulgara",
+        "name": "Sentadilla búlgara",
+        "mode": "reps",
+        "reps": "10 por pierna",
+        "notes": "Bajás lo más que podés y subís lento."
+       },
+       {
+        "key": "leg-press",
+        "name": "Leg press (reemplazo)",
+        "mode": "peso",
+        "reps": "12"
+       }
+      ],
+      "circuit": "si"
+     },
+     {
+      "name": "Remo",
+      "sets": "2 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "remo-unilateral",
+        "name": "Remo unilateral",
+        "mode": "peso",
+        "reps": "10–12 c/lado",
+        "kg": "8–12"
+       }
+      ]
+     },
+     {
+      "name": "Dupleto",
+      "sets": "2 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "estocada-biceps",
+        "name": "Estocada atrás con bíceps",
+        "mode": "peso",
+        "reps": "20",
+        "kg": "5–6 c/mano"
+       },
+       {
+        "key": "fondos-triceps",
+        "name": "Fondos de tríceps en banco",
+        "mode": "reps",
+        "reps": "10"
+       },
+       {
+        "key": "leg-extension",
+        "name": "Leg extension (reemplazo)",
+        "mode": "peso",
+        "reps": "10"
+       }
+      ],
+      "circuit": "si"
+     }
+    ]
+   }
+  ]
+ },
+ "note": "Fechas estimadas: cada ✅ es una semana, en orden.",
+ "sessions": [
+  {
+   "date": "2026-07-13",
+   "day_id": "lunes",
+   "entries": {
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 8,
+       "kg": 25
+      }
+     ]
+    },
+    "abs-situp": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "abs-plancha": {
+     "done": true,
+     "note": "4×20 s"
+    },
+    "dorsales-prono": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "dorsales-supino": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "kickback-polea": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 7.5
+      },
+      {
+       "reps": 15,
+       "kg": 7.5
+      },
+      {
+       "reps": 15,
+       "kg": 10
+      }
+     ]
+    },
+    "abductores-maquina": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 40
+      },
+      {
+       "reps": 10,
+       "kg": 40
+      },
+      {
+       "reps": 10,
+       "kg": 40
+      }
+     ]
+    },
+    "aductores-maquina": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      }
+     ]
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ]
+    }
+   },
+   "note": "Tiempo: una hora"
+  },
+  {
+   "date": "2026-07-15",
+   "day_id": "miercoles",
+   "entries": {
+    "sentadilla-disco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "Creo que no entendí bien la variante B"
+    },
+    "press-pecho-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 22.5
+      },
+      {
+       "reps": 10,
+       "kg": 22.5
+      },
+      {
+       "reps": 10,
+       "kg": 22.5
+      }
+     ]
+    },
+    "apertura-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      }
+     ]
+    },
+    "estocada-biceps": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": 6
+      },
+      {
+       "reps": 20,
+       "kg": 6
+      }
+     ]
+    },
+    "vuelo-frontal": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "vuelo-lateral": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "triceps-tras-nuca": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-07-17",
+   "day_id": "viernes",
+   "entries": {
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 8
+      },
+      {
+       "reps": 12,
+       "kg": 8
+      },
+      {
+       "reps": 12,
+       "kg": 8
+      }
+     ],
+     "note": "12 c/mano"
+    },
+    "puente-gluteo": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 20
+      },
+      {
+       "reps": 12,
+       "kg": 20
+      },
+      {
+       "reps": 12,
+       "kg": 20
+      }
+     ]
+    },
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      }
+     ]
+    },
+    "sentadilla-bulgara": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      }
+     ]
+    },
+    "estocada-biceps": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": 6
+      },
+      {
+       "reps": 20,
+       "kg": 6
+      },
+      {
+       "reps": 20,
+       "kg": 6
+      }
+     ],
+     "note": "10 c/pierna"
+    },
+    "fondos-triceps": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    }
+   },
+   "note": "Tiempo: 1:15"
+  },
+  {
+   "date": "2026-07-20",
+   "day_id": "lunes",
+   "entries": {
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "abs-situp": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "abs-plancha": {
+     "done": true,
+     "note": "4×25 s"
+    },
+    "dorsales-prono": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "dorsales-supino": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "kickback-polea": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 10
+      },
+      {
+       "reps": 15,
+       "kg": 10
+      },
+      {
+       "reps": 15,
+       "kg": 10
+      }
+     ]
+    },
+    "abductores-maquina": {
+     "note": "Máquina rota"
+    },
+    "patada-lateral-polea": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 5
+      },
+      {
+       "reps": 10,
+       "kg": 5
+      }
+     ],
+     "note": "En lugar de abductores"
+    },
+    "aductores-maquina": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      }
+     ]
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-07-22",
+   "day_id": "miercoles",
+   "entries": {
+    "sentadilla-disco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "Solo variante A"
+    },
+    "press-pecho-banco": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 25
+      },
+      {
+       "reps": 8,
+       "kg": 25
+      },
+      {
+       "reps": 8,
+       "kg": 25
+      }
+     ]
+    },
+    "apertura-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 8
+      },
+      {
+       "reps": 10,
+       "kg": 8
+      },
+      {
+       "reps": 10,
+       "kg": 8
+      }
+     ]
+    },
+    "estocada-biceps": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": 6
+      },
+      {
+       "reps": 20,
+       "kg": 6
+      }
+     ]
+    },
+    "vuelo-frontal": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "vuelo-lateral": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "triceps-tras-nuca": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-07-24",
+   "day_id": "viernes",
+   "entries": {
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "puente-gluteo": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 28
+      },
+      {
+       "reps": 12,
+       "kg": 28
+      },
+      {
+       "reps": 12,
+       "kg": 28
+      }
+     ]
+    },
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      }
+     ]
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      }
+     ]
+    },
+    "estocada-biceps": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": 6
+      },
+      {
+       "reps": 20,
+       "kg": 6
+      }
+     ],
+     "note": "10 c/pierna"
+    },
+    "fondos-triceps": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-07-27",
+   "day_id": "lunes",
+   "entries": {
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "abs-situp": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "abs-plancha": {
+     "done": true,
+     "note": "4×30 s"
+    },
+    "dorsales-prono": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "dorsales-supino": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "kickback-polea": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 14
+      },
+      {
+       "reps": 15,
+       "kg": 14
+      },
+      {
+       "reps": 15,
+       "kg": 14
+      }
+     ]
+    },
+    "abductores-maquina": {
+     "note": "Máquina rota; lo hice con elástico"
+    },
+    "aductores-maquina": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      }
+     ]
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-07-29",
+   "day_id": "miercoles",
+   "entries": {
+    "sentadilla-disco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "Solo variante A"
+    },
+    "press-pecho-banco": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 25
+      },
+      {
+       "reps": 8,
+       "kg": 25
+      },
+      {
+       "reps": 8,
+       "kg": 25
+      }
+     ]
+    },
+    "apertura-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 8
+      },
+      {
+       "reps": 10,
+       "kg": 8
+      },
+      {
+       "reps": 10,
+       "kg": 8
+      }
+     ]
+    },
+    "leg-press": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 50
+      },
+      {
+       "reps": 10,
+       "kg": 50
+      },
+      {
+       "reps": 10,
+       "kg": 50
+      }
+     ],
+     "note": "En lugar de estocada"
+    },
+    "leg-extension": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 25
+      },
+      {
+       "reps": 8,
+       "kg": 25
+      },
+      {
+       "reps": 8,
+       "kg": 25
+      }
+     ],
+     "note": "En lugar de estocada"
+    },
+    "vuelo-frontal": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "vuelo-lateral": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "triceps-tras-nuca": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-07-31",
+   "day_id": "viernes",
+   "entries": {
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "puente-gluteo": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 24
+      },
+      {
+       "reps": 12,
+       "kg": 24
+      }
+     ]
+    },
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      }
+     ]
+    },
+    "leg-press": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 60
+      },
+      {
+       "reps": 12,
+       "kg": 60
+      }
+     ],
+     "note": "En lugar de búlgara"
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      }
+     ]
+    },
+    "leg-extension": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      }
+     ],
+     "note": "En lugar de estocada"
+    },
+    "fondos-triceps": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-08-03",
+   "day_id": "lunes",
+   "entries": {
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      }
+     ]
+    },
+    "abs-situp": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "abs-plancha": {
+     "done": true,
+     "note": "4×30 s"
+    },
+    "dorsales-prono": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "dorsales-supino": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "kickback-polea": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 10
+      },
+      {
+       "reps": 15,
+       "kg": 10
+      },
+      {
+       "reps": 15,
+       "kg": 10
+      }
+     ]
+    },
+    "abductores-maquina": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 40
+      },
+      {
+       "reps": 10,
+       "kg": 40
+      },
+      {
+       "reps": 10,
+       "kg": 40
+      },
+      {
+       "reps": 10,
+       "kg": 40
+      }
+     ]
+    },
+    "aductores-maquina": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-08-05",
+   "day_id": "miercoles",
+   "entries": {
+    "sentadilla-disco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "Solo variante A"
+    },
+    "press-pecho-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 7,
+       "kg": 25
+      }
+     ]
+    },
+    "leg-press": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 55
+      },
+      {
+       "reps": 10,
+       "kg": 55
+      },
+      {
+       "reps": 10,
+       "kg": 55
+      }
+     ],
+     "note": "En lugar de estocada"
+    },
+    "leg-extension": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      }
+     ],
+     "note": "En lugar de estocada"
+    },
+    "vuelo-frontal": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 5
+      },
+      {
+       "reps": 8,
+       "kg": 5
+      }
+     ]
+    },
+    "vuelo-lateral": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 5
+      },
+      {
+       "reps": 8,
+       "kg": 5
+      }
+     ]
+    },
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "triceps-tras-nuca": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-08-07",
+   "day_id": "viernes",
+   "entries": {
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "puente-gluteo": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 30
+      },
+      {
+       "reps": 12,
+       "kg": 30
+      }
+     ]
+    },
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      }
+     ]
+    },
+    "leg-press": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 80
+      },
+      {
+       "reps": 12,
+       "kg": 80
+      }
+     ],
+     "note": "En lugar de búlgara"
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 12
+      },
+      {
+       "reps": 8,
+       "kg": 12
+      }
+     ]
+    },
+    "leg-extension": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      }
+     ],
+     "note": "En lugar de estocada"
+    },
+    "fondos-triceps": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    }
+   },
+   "note": ""
+  },
+  {
+   "date": "2026-08-10",
+   "day_id": "lunes",
+   "entries": {
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      },
+      {
+       "reps": 10,
+       "kg": 35
+      }
+     ]
+    },
+    "abs-situp": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "abs-plancha": {
+     "done": true,
+     "note": "4×30 s"
+    },
+    "dorsales-prono": {
+     "sets": [
+      {
+       "reps": 6,
+       "kg": 35
+      },
+      {
+       "reps": 6,
+       "kg": 35
+      }
+     ]
+    },
+    "dorsales-supino": {
+     "sets": [
+      {
+       "reps": 6,
+       "kg": 35
+      },
+      {
+       "reps": 6,
+       "kg": 35
+      }
+     ]
+    },
+    "kickback-polea": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 9
+      }
+     ]
+    },
+    "aductores-maquina": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 37.5
+      },
+      {
+       "reps": 10,
+       "kg": 37.5
+      },
+      {
+       "reps": 10,
+       "kg": 37.5
+      }
+     ]
+    }
+   },
+   "note": ""
+  }
+ ]
+}
