@@ -117,6 +117,53 @@ async function seed(athleteId) {
   console.log("Rutina del mes 5 y entreno del 12/10 cargados.");
 }
 
+// Past months in history/*.json. Each file is imported once (remembered in
+// athlete_settings.data.imported), so deleting a routine in the app sticks.
+// Existing sessions on the same date/day are never overwritten.
+async function importHistory(athleteId) {
+  if (!athleteId) return;
+  const dir = path.join(__dirname, "history");
+  if (!fs.existsSync(dir)) return;
+  const { rows } = await q("SELECT data FROM athlete_settings WHERE athlete_id=$1", [athleteId]);
+  const done = new Set(rows[0]?.data?.imported || []);
+  for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".json")).sort()) {
+    const h = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8"));
+    if (!h.id || done.has(h.id)) continue;
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      const r = h.routine;
+      const ins = await client.query(
+        "INSERT INTO routines (athlete_id,name,date_from,date_to,days) VALUES ($1,$2,$3,$4,$5) RETURNING id",
+        [athleteId, r.name, r.from, r.to, JSON.stringify(r.days)]
+      );
+      let n = 0;
+      for (const s of h.sessions || []) {
+        const dayName = r.days.find((d) => d.id === s.day_id)?.name || s.day_id;
+        const res = await client.query(
+          `INSERT INTO sessions (athlete_id,date,routine_id,day_id,day_name,entries,note)
+           VALUES ($1,$2,$3,$4,$5,$6,$7) ON CONFLICT (athlete_id,date,day_id) DO NOTHING`,
+          [athleteId, s.date, ins.rows[0].id, s.day_id, dayName, JSON.stringify(s.entries || {}), s.note || ""]
+        );
+        n += res.rowCount;
+      }
+      done.add(h.id);
+      await client.query(
+        `INSERT INTO athlete_settings (athlete_id, data) VALUES ($1, $2)
+         ON CONFLICT (athlete_id) DO UPDATE SET data = athlete_settings.data || EXCLUDED.data, updated_at = now()`,
+        [athleteId, JSON.stringify({ imported: [...done] })]
+      );
+      await client.query("COMMIT");
+      console.log(`Historial importado: ${r.name} (${n} entrenos)`);
+    } catch (e) {
+      await client.query("ROLLBACK");
+      console.error(`No se pudo importar ${f}:`, e.message);
+    } finally {
+      client.release();
+    }
+  }
+}
+
 // ---------- App ----------
 const app = express();
 app.set("trust proxy", 1);
@@ -423,4 +470,5 @@ await migrate();
 const athleteId = await ensureUser(process.env.ATHLETE_EMAIL, process.env.ATHLETE_PASSWORD, process.env.ATHLETE_NAME || "Juli", "atleta");
 await ensureUser(process.env.COACH_EMAIL, process.env.COACH_PASSWORD, process.env.COACH_NAME || "Entrenadora", "entrenadora");
 await seed(athleteId);
+await importHistory(athleteId);
 app.listen(PORT, () => console.log(`Entrenos escuchando en :${PORT}`));

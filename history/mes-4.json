@@ -1,0 +1,1034 @@
+{
+ "id": "mes-4",
+ "routine": {
+  "name": "Mes 4",
+  "from": "2026-09-14",
+  "to": "2026-10-11",
+  "days": [
+   {
+    "id": "lunes",
+    "name": "Lunes",
+    "blocks": [
+     {
+      "name": "Entrada en calor · abdominales",
+      "sets": "2 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "abs-crunch",
+        "name": "Crunch",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-situp",
+        "name": "Sit up",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-oblicuos",
+        "name": "Oblicuos (codo con rodilla contraria)",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-plancha",
+        "name": "Plancha sobre antebrazos",
+        "mode": "check",
+        "reps": "30 seg"
+       },
+       {
+        "key": "abs-plancha-cadera",
+        "name": "Plancha antebrazos, cadera a un lado y al otro",
+        "mode": "check",
+        "reps": "30 seg"
+       },
+       {
+        "key": "abs-plancha-hombros",
+        "name": "Plancha alta tocando hombro contrario",
+        "mode": "check",
+        "reps": "30 seg"
+       }
+      ]
+     },
+     {
+      "name": "Espalda",
+      "sets": "",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "dorsales-prono",
+        "name": "Dorsales, toma prona",
+        "mode": "peso",
+        "sets": "2–3",
+        "reps": "6–8",
+        "kg": "35"
+       },
+       {
+        "key": "dorsales-supino",
+        "name": "Dorsales, toma supina",
+        "mode": "peso",
+        "sets": "2–3",
+        "reps": "6–8",
+        "kg": "35"
+       }
+      ]
+     },
+     {
+      "name": "Dupleto",
+      "sets": "3 series",
+      "notes": "1 serie de sentadilla y 1 de abdominales inferiores, y así 3 veces.",
+      "circuit": "si",
+      "exercises": [
+       {
+        "key": "sentadilla-disco",
+        "name": "Sentadilla con disco arriba",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–12",
+        "kg": "10",
+        "notes": "Bajás con el disco hacia el suelo y al estirar las piernas llevás el disco hacia arriba."
+       },
+       {
+        "key": "abs-inferiores",
+        "name": "Abdominales inferiores",
+        "mode": "reps",
+        "sets": "3",
+        "reps": "20"
+       }
+      ]
+     },
+     {
+      "name": "Cuarteto · glúteos + brazos",
+      "sets": "3 series",
+      "notes": "Dos ejercicios de glúteos y en la pausa, brazos.",
+      "circuit": "si",
+      "exercises": [
+       {
+        "key": "biceps-mancuernas",
+        "name": "Bíceps: flexión de codo con mancuernas",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "8–10 c/brazo",
+        "kg": "8"
+       },
+       {
+        "key": "puente-gluteo",
+        "name": "Puente de glúteo con carga",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "15–20",
+        "kg": "30",
+        "notes": "Mancuernas, corebag o barra."
+       },
+       {
+        "key": "triceps-extension-arriba",
+        "name": "Tríceps: extensión de codo hacia arriba",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–15",
+        "kg": "6–8"
+       },
+       {
+        "key": "peso-muerto",
+        "name": "Peso muerto",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–15",
+        "kg": "20",
+        "notes": "Mancuernas o barra."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "miercoles",
+    "name": "Miércoles",
+    "blocks": [
+     {
+      "name": "Entrada en calor · abdominales",
+      "sets": "2 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "abs-crunch",
+        "name": "Crunch",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-situp",
+        "name": "Sit up",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-oblicuos",
+        "name": "Oblicuos (codo con rodilla contraria)",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-plancha",
+        "name": "Plancha sobre antebrazos",
+        "mode": "check",
+        "reps": "30 seg"
+       },
+       {
+        "key": "abs-plancha-cadera",
+        "name": "Plancha antebrazos, cadera a un lado y al otro",
+        "mode": "check",
+        "reps": "30 seg"
+       },
+       {
+        "key": "abs-plancha-hombros",
+        "name": "Plancha alta tocando hombro contrario",
+        "mode": "check",
+        "reps": "30 seg"
+       }
+      ]
+     },
+     {
+      "name": "Pectorales",
+      "sets": "",
+      "notes": "Antes, una serie de press con poca carga (10 reps) para entrar en calor.",
+      "exercises": [
+       {
+        "key": "press-pecho-banco",
+        "name": "Press de pecho en banco plano",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "8 / 10 / 12",
+        "kg": "25"
+       },
+       {
+        "key": "apertura-banco",
+        "name": "Apertura en banco plano con mancuernas",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10",
+        "kg": "10 c/mano"
+       }
+      ]
+     },
+     {
+      "name": "Glúteos",
+      "sets": "",
+      "notes": "",
+      "circuit": "no",
+      "exercises": [
+       {
+        "key": "hip-thrust",
+        "name": "Hip thrust",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "8–10",
+        "kg": "40+",
+        "notes": "Barra o máquina. Arriba aguantás 3 segundos y bajás suave."
+       },
+       {
+        "key": "peso-muerto",
+        "name": "Peso muerto",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–12",
+        "kg": "10 c/mano",
+        "notes": "Cadera hacia atrás con leve flexión de rodilla y al subir apretás los glúteos. Cuidado con la zona lumbar si subís carga."
+       }
+      ]
+     },
+     {
+      "name": "Hombros · tripleto",
+      "sets": "3 series",
+      "notes": "Sentada en banco o arrodillada.",
+      "circuit": "si",
+      "exercises": [
+       {
+        "key": "vuelo-frontal",
+        "name": "Vuelo frontal",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "8–10",
+        "kg": "4"
+       },
+       {
+        "key": "vuelo-lateral",
+        "name": "Vuelo lateral",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "8–10",
+        "kg": "4"
+       },
+       {
+        "key": "vuelo-posterior",
+        "name": "Vuelo posterior",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "8–10",
+        "kg": "2–3"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "viernes",
+    "name": "Viernes",
+    "blocks": [
+     {
+      "name": "Entrada en calor · abdominales",
+      "sets": "2 series",
+      "notes": "",
+      "exercises": [
+       {
+        "key": "abs-crunch",
+        "name": "Crunch",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-situp",
+        "name": "Sit up",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-oblicuos",
+        "name": "Oblicuos (codo con rodilla contraria)",
+        "mode": "check",
+        "reps": "20 seg"
+       },
+       {
+        "key": "abs-plancha",
+        "name": "Plancha sobre antebrazos",
+        "mode": "check",
+        "reps": "30 seg"
+       },
+       {
+        "key": "abs-plancha-cadera",
+        "name": "Plancha antebrazos, cadera a un lado y al otro",
+        "mode": "check",
+        "reps": "30 seg"
+       },
+       {
+        "key": "abs-plancha-hombros",
+        "name": "Plancha alta tocando hombro contrario",
+        "mode": "check",
+        "reps": "30 seg"
+       }
+      ]
+     },
+     {
+      "name": "Glúteos · dupleto",
+      "sets": "3 series",
+      "notes": "",
+      "circuit": "si",
+      "exercises": [
+       {
+        "key": "swing-1-mano",
+        "name": "Swing a 1 mano (kettlebell)",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10",
+        "kg": "12"
+       },
+       {
+        "key": "puente-step",
+        "name": "Puente con carga, pies en step",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "10–12",
+        "kg": "30"
+       }
+      ]
+     },
+     {
+      "name": "Remo",
+      "sets": "",
+      "notes": "Si te cansás, bajá a 14 kg.",
+      "exercises": [
+       {
+        "key": "remo-unilateral",
+        "name": "Remo unilateral",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "6 / 8 / 10",
+        "kg": "16"
+       }
+      ]
+     },
+     {
+      "name": "Dupleto",
+      "sets": "3 series",
+      "notes": "Alternás 3 veces.",
+      "circuit": "si",
+      "exercises": [
+       {
+        "key": "sentadilla-abierta-press",
+        "name": "Sentadilla piernas abiertas + press de hombros",
+        "mode": "peso",
+        "sets": "3",
+        "reps": "",
+        "kg": "5 c/mano"
+       },
+       {
+        "key": "abs-inferiores",
+        "name": "Abdominales inferiores",
+        "mode": "reps",
+        "sets": "3",
+        "reps": "20"
+       }
+      ]
+     },
+     {
+      "name": "Dupleto final",
+      "sets": "3 series",
+      "notes": "Cada serie de fondos se combina con una vuelta distinta: 1ª climbers, 2ª sentadilla con salto, 3ª codo a rodilla contraria.",
+      "circuit": "no",
+      "exercises": [
+       {
+        "key": "fondos-triceps",
+        "name": "Fondos de tríceps en banco",
+        "mode": "reps",
+        "sets": "3",
+        "reps": "10"
+       },
+       {
+        "key": "climbers",
+        "name": "Climbers (1ª vuelta)",
+        "mode": "reps",
+        "sets": "1",
+        "reps": "10"
+       },
+       {
+        "key": "sentadilla-salto",
+        "name": "Sentadilla con salto (2ª vuelta)",
+        "mode": "reps",
+        "sets": "1",
+        "reps": "10"
+       },
+       {
+        "key": "codo-rodilla-pie",
+        "name": "De pie, codo con rodilla contraria (3ª vuelta)",
+        "mode": "reps",
+        "sets": "1",
+        "reps": "20"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "note": "Fechas estimadas: el texto no las traía. 1er ✅ = 1ª semana, 2º ✅ = 2ª semana.",
+ "sessions": [
+  {
+   "date": "2026-09-14",
+   "day_id": "lunes",
+   "entries": {
+    "dorsales-prono": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      }
+     ]
+    },
+    "dorsales-supino": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      }
+     ]
+    },
+    "sentadilla-disco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      }
+     ]
+    },
+    "abs-inferiores": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": null
+      },
+      {
+       "reps": 20,
+       "kg": null
+      },
+      {
+       "reps": 20,
+       "kg": null
+      }
+     ]
+    },
+    "biceps-mancuernas": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 8
+      },
+      {
+       "reps": 8,
+       "kg": 8
+      },
+      {
+       "reps": 8,
+       "kg": 8
+      }
+     ]
+    },
+    "puente-gluteo": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      }
+     ]
+    },
+    "triceps-extension-arriba": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      }
+     ]
+    },
+    "peso-muerto": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      }
+     ]
+    }
+   }
+  },
+  {
+   "date": "2026-09-21",
+   "day_id": "lunes",
+   "entries": {
+    "dorsales-prono": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      }
+     ]
+    },
+    "dorsales-supino": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      },
+      {
+       "reps": 8,
+       "kg": 35
+      }
+     ]
+    },
+    "sentadilla-disco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      }
+     ]
+    },
+    "abs-inferiores": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": null
+      },
+      {
+       "reps": 20,
+       "kg": null
+      },
+      {
+       "reps": 20,
+       "kg": null
+      }
+     ]
+    },
+    "biceps-mancuernas": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 8
+      },
+      {
+       "reps": 8,
+       "kg": 8
+      },
+      {
+       "reps": 8,
+       "kg": 8
+      }
+     ]
+    },
+    "puente-gluteo": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      }
+     ]
+    },
+    "triceps-extension-arriba": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      },
+      {
+       "reps": 10,
+       "kg": 6
+      }
+     ]
+    },
+    "peso-muerto": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 20
+      },
+      {
+       "reps": 10,
+       "kg": 20
+      },
+      {
+       "reps": 10,
+       "kg": 20
+      }
+     ]
+    }
+   }
+  },
+  {
+   "date": "2026-09-16",
+   "day_id": "miercoles",
+   "entries": {
+    "press-pecho-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      }
+     ]
+    },
+    "apertura-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "10 kg en cada mano"
+    },
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 8,
+       "kg": 30
+      },
+      {
+       "reps": 8,
+       "kg": 30
+      },
+      {
+       "reps": 8,
+       "kg": 30
+      }
+     ],
+     "note": "En máquina me cuesta mucho más"
+    },
+    "peso-muerto": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "10 kg en cada mano"
+    },
+    "vuelo-frontal": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "vuelo-lateral": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "vuelo-posterior": {
+     "note": "No lo hice: no sé si lo hago mal pero me contractura"
+    }
+   }
+  },
+  {
+   "date": "2026-09-23",
+   "day_id": "miercoles",
+   "entries": {
+    "press-pecho-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      },
+      {
+       "reps": 10,
+       "kg": 25
+      }
+     ]
+    },
+    "apertura-banco": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      },
+      {
+       "reps": 10,
+       "kg": 10
+      }
+     ],
+     "note": "10 kg en cada mano"
+    },
+    "hip-thrust": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      },
+      {
+       "reps": 10,
+       "kg": 30
+      }
+     ]
+    },
+    "peso-muerto": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      },
+      {
+       "reps": 10,
+       "kg": 12
+      }
+     ]
+    },
+    "vuelo-frontal": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    },
+    "vuelo-lateral": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      },
+      {
+       "reps": 10,
+       "kg": 4
+      }
+     ]
+    }
+   }
+  },
+  {
+   "date": "2026-09-18",
+   "day_id": "viernes",
+   "entries": {
+    "swing-1-mano": {
+     "sets": [
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      },
+      {
+       "reps": 12,
+       "kg": 12
+      }
+     ]
+    },
+    "puente-step": {
+     "sets": [
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      },
+      {
+       "reps": 15,
+       "kg": 30
+      }
+     ]
+    },
+    "remo-unilateral": {
+     "sets": [
+      {
+       "reps": 6,
+       "kg": 16
+      },
+      {
+       "reps": 6,
+       "kg": 16
+      },
+      {
+       "reps": 6,
+       "kg": 16
+      }
+     ]
+    },
+    "sentadilla-abierta-press": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": 5
+      },
+      {
+       "reps": 10,
+       "kg": 5
+      },
+      {
+       "reps": 10,
+       "kg": 5
+      }
+     ]
+    },
+    "abs-inferiores": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": null
+      },
+      {
+       "reps": 20,
+       "kg": null
+      },
+      {
+       "reps": 20,
+       "kg": null
+      }
+     ]
+    },
+    "fondos-triceps": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      },
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "climbers": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ],
+     "note": "10 c/pierna"
+    },
+    "sentadilla-salto": {
+     "sets": [
+      {
+       "reps": 10,
+       "kg": null
+      }
+     ]
+    },
+    "codo-rodilla-pie": {
+     "sets": [
+      {
+       "reps": 20,
+       "kg": null
+      }
+     ]
+    }
+   }
+  }
+ ]
+}
