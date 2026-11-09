@@ -54,11 +54,23 @@ const isCoach = () => S.me?.role === "entrenadora";
 const athleteName = () => S.athletes.find((a) => a.id === S.athleteId)?.name || "Juli";
 const routineById = (id) => S.routines.find((r) => r.id === id);
 
+// A routine without dates counts as starting the day it was created
+const startOf = (r) => r.from || (r.created_at || "").slice(0, 10) || "0000";
 function currentRoutine(date = todayISO()) {
   if (!S.routines.length) return null;
-  return S.routines.find((r) => r.from && r.to && r.from <= date && date <= r.to)
-    || S.routines.find((r) => r.from && r.from <= date)
-    || S.routines[0];
+  const byStart = [...S.routines].sort((a, b) => startOf(b).localeCompare(startOf(a)) || b.id - a.id);
+  return byStart.find((r) => r.from && r.to && r.from <= date && date <= r.to)
+    || byStart.find((r) => startOf(r) <= date)
+    || byStart[0];
+}
+// New routines start the day after the current one ends (or today) and last 4 weeks
+function defaultDates() {
+  const today = todayISO();
+  const cur = currentRoutine(today);
+  let from = today;
+  if (cur?.to && cur.to >= today) { const d = asDate(cur.to); d.setDate(d.getDate() + 1); from = d.toISOString().slice(0, 10); }
+  const t = asDate(from); t.setDate(t.getDate() + 27);
+  return { from, to: t.toISOString().slice(0, 10) };
 }
 function exerciseIndex() {
   const m = new Map();
@@ -632,7 +644,7 @@ function viewRoutines() {
     const open = S.openRoutine === r.id;
     return `<article class="card rt">
       <button class="rt-head" data-rt="${r.id}" aria-expanded="${open}">
-        <span class="grow"><span class="nm">${h(r.name)}</span><br><span class="small muted">${r.from ? `${fmtShort(r.from)} – ${fmtShort(r.to)}` : "Sin fechas"} · ${r.days.map((d) => h(d.name)).join(", ")}</span></span>
+        <span class="grow"><span class="nm">${h(r.name)}</span><br><span class="small muted">${r.from ? `${fmtShort(r.from)} – ${r.to ? fmtShort(r.to) : "…"}` : `Sin fechas (cargada el ${fmtShort(startOf(r))})`} · ${r.days.map((d) => h(d.name)).join(", ")}</span></span>
         ${cur && cur.id === r.id ? '<span class="badge">Vigente</span>' : ""}
         <span class="muted" aria-hidden="true">${open ? "▴" : "▾"}</span>
       </button>
@@ -915,7 +927,7 @@ $app.addEventListener("click", async (ev) => {
     const r = routineById(+d.duprt);
     const num = parseInt((r.name.match(/\d+/) || [])[0], 10);
     S.sheet = null;
-    S.editor = { id: null, data: clone({ name: Number.isFinite(num) ? r.name.replace(/\d+/, num + 1) : `${r.name} (copia)`, from: "", to: "", days: r.days }) };
+    S.editor = { id: null, data: clone({ name: Number.isFinite(num) ? r.name.replace(/\d+/, num + 1) : `${r.name} (copia)`, ...defaultDates(), days: r.days }) };
     render(); window.scrollTo(0, 0); return;
   }
   if (d.ed) {
@@ -961,14 +973,14 @@ $app.addEventListener("click", async (ev) => {
     case "new-routine": S.sheet = "new-routine"; render(); break;
     case "blank-routine":
       S.sheet = null;
-      S.editor = { id: null, data: { name: "", from: "", to: "", days: [{ id: "lunes", name: "Lunes", blocks: [{ name: "Bloque", sets: "", notes: "", exercises: [] }] }] } };
+      S.editor = { id: null, data: { name: "", ...defaultDates(), days: [{ id: "lunes", name: "Lunes", blocks: [{ name: "Bloque", sets: "", notes: "", exercises: [] }] }] } };
       render(); break;
     case "parse": {
       const err = document.getElementById("parse-err"); err.hidden = true;
       el.disabled = true; el.textContent = "Leyendo la rutina…";
       try {
         const data = await api("POST", "/api/routines/parse", { text: document.getElementById("paste").value });
-        S.sheet = null; S.editor = { id: null, data: { name: data.name || "", from: data.from || "", to: data.to || "", days: data.days || [] } };
+        S.sheet = null; S.editor = { id: null, data: { name: data.name || "", from: data.from || defaultDates().from, to: data.to || defaultDates().to, days: data.days || [] } };
         render(); window.scrollTo(0, 0);
       } catch (e) { err.textContent = e.message; err.hidden = false; el.disabled = false; el.textContent = "Interpretar y revisar"; }
       break;
@@ -979,6 +991,7 @@ $app.addEventListener("click", async (ev) => {
       const data = finalizeRoutine(clone(S.editor.data));
       if (!data.name.trim()) { err.textContent = "Ponele un nombre a la rutina."; err.hidden = false; break; }
       if (!data.days.length) { err.textContent = "La rutina necesita al menos un día."; err.hidden = false; break; }
+      if (!S.editor.id && !data.from) Object.assign(data, defaultDates());
       el.disabled = true;
       try {
         const saved = S.editor.id ? await api("PUT", `/api/routines/${S.editor.id}`, data) : await api("POST", "/api/routines", data);

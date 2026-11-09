@@ -256,11 +256,12 @@ const routineOut = (r) => ({
   from: r.date_from || null,
   to: r.date_to || null,
   days: r.days, updated_at: r.updated_at,
+  created_at: r.created_at,
 });
 
 app.get("/api/routines", auth, wrap(async (req, res) => {
   const aid = await athleteFor(req);
-  const { rows } = await q("SELECT * FROM routines WHERE athlete_id=$1 ORDER BY date_from DESC NULLS LAST, id DESC", [aid]);
+  const { rows } = await q("SELECT * FROM routines WHERE athlete_id=$1 ORDER BY COALESCE(date_from, created_at::date) DESC, id DESC", [aid]);
   res.json(rows.map(routineOut));
 }));
 
