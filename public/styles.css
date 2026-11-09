@@ -221,8 +221,10 @@ details.how p { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
 .circuit .ex-actions { align-items: center; }
 
 .check-list { padding: 4px 0; }
-.check-row { display: flex; align-items: center; border-top: 1px solid var(--line); }
-.check-row:first-child { border-top: 0; }
+.check-item { border-top: 1px solid var(--line); }
+.check-item:first-child { border-top: 0; }
+.check-row { display: flex; align-items: center; }
+.check-how { padding: 0 14px 10px 50px; margin-top: -6px; }
 .check {
   display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; text-align: left;
   background: none; border: 0; padding: 11px 14px;

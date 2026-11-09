@@ -394,9 +394,12 @@ const fmtClock = (sec) => { const a = Math.abs(Math.round(sec)); return `${Math.
 function checkRow(e, bold) {
   const done = !!S.train.entries[e.key]?.done;
   const secs = secsOf(e);
-  return `<div class="check-row">
-    <button class="check" data-check="${h(e.key)}" aria-pressed="${done}"><span class="box"></span><span class="t">${bold ? `<b>${h(e.name)}</b>` : h(e.name)}</span><span class="r">${h(e.reps || "")}</span></button>
-    ${secs ? `<button class="play" data-extimer="${h(e.key)}" data-secs="${secs}" data-label="${h(e.name)}" aria-label="Temporizador ${secs} segundos">${ICON_PLAY}</button>` : ""}
+  return `<div class="check-item">
+    <div class="check-row">
+      <button class="check" data-check="${h(e.key)}" aria-pressed="${done}"><span class="box"></span><span class="t">${bold ? `<b>${h(e.name)}</b>` : h(e.name)}</span><span class="r">${h(e.reps || "")}</span></button>
+      ${secs ? `<button class="play" data-extimer="${h(e.key)}" data-secs="${secs}" data-label="${h(e.name)}" aria-label="Temporizador ${secs} segundos">${ICON_PLAY}</button>` : ""}
+    </div>
+    ${e.notes ? `<details class="how check-how"><summary>Cómo se hace</summary><p>${h(e.notes)}</p></details>` : ""}
   </div>`;
 }
 
